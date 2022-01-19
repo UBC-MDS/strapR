@@ -18,5 +18,5 @@
 #' bootstrap(c(1, 2, 3), 3, 3)
 #' bootstrap(c(1, 2, 3), 3, 3, estimator = "var", seed = 1)
 bootstrap <- function(sample, rep, n = "auto", estimator = "mean",
-                                   seed = NULL) {
+                      seed = NULL) {
 }
