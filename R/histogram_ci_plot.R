@@ -1,7 +1,9 @@
 #' Plots a bootstrapped sampling distribution with its confidence interval and observed mean.
 #'
-#' Makes a histogram of a bootstrapped sampling distribution 
-#' with its confidence interval `level` and observed mean.
+#' A bootstrapped confidence interval for the desired estimator for
+#' the provided sample is calculated for a confidence level `level`.
+#' Other stats and parameters of the distribution and sample are
+#' also returned.
 #'
 #' @param sample A numeric vector to bootstrap
 #' @param rep A integer vector for number of replicates
