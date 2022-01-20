@@ -22,5 +22,5 @@
 #' stats_table, parameter_table  <-  summary_tables(st)
 #' stats_table
 #' parameter_table
-summary_tables <- function(stat, precision=2, estimator=True, alpha=True) {
+summary_tables <- function(stat, precision=2, estimator=TRUE, alpha=TRUE) {
 }
