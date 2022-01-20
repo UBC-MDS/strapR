@@ -68,21 +68,17 @@ This is a basic example which shows you how to solve a common problem:
 
 ## Function Usage
 
--   bootstrap_distribution: A sampling distribution of \`rep\`
-    replicates is generated for a specified estimator with replacement
-    for a given bootstrap sample size.
+-   bootstrap: Bootstraps a sampling distribution for a sample.
 
--   calculate_boot_stats: A confidence interval for a given sampling
-    distribution is calculated for a given confidence level.
+-   bootstrap_stats: Calculates a bootstrapped confidence interval and 
+    other stats for a sample.
 
--   density_ci_plot: Generates a plot showing a density curve of a given
-    sampling distribution along with its confidence interval ci for a
-    given alpha.
+-   histogram_ci_plot: Plots a bootstrapped sampling distribution with its 
+    confidence interval and observed mean.
 
--   ci_table: Generates a table that contains a given sampling
-    distribution’s mean and standard deviation along with relevant
-    statistics like its confidence interval for a given confidence
-    level.
+-   summary_tables: Makes two tables that summerize the statistics from 
+    the bootstrapped samples and the parameters for creating the bootstrapped
+    samples.
 
 ## Contributing
 
