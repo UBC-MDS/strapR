@@ -4,7 +4,8 @@ Version: 0.1.0
 Authors@R:
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-    person("Gordon", "Julien", , "junigord@gmail.com", role = c("aut", "cre"))
+    person("Gordon", "Julien", "junigord@gmail.com", role = c("aut", "cre"))
+    person("Tang", "Zack", , "zacktang113@gmail.com", role = c("aut", "cre"))
 Description: The purpose of this package is to simplify and automate the process
 of creating simple bootstrap distributions of numerical data columns.
 The package will have a module which intakes a dataset column and relevant
