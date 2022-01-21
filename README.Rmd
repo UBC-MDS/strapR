@@ -61,7 +61,7 @@ This is a basic example which shows you how to solve a common problem:
 
 -   histogram_ci_plot: Generates a plot showing a density curve of a given sampling distribution along with its confidence interval ci for a given alpha.
 
--   ci_table: Generates a table that contains a given sampling distribution's mean and standard deviation along with relevant statistics like its confidence interval for a given confidence level.
+-   summary_tables: Generates a table that contains a given sampling distribution's mean and standard deviation along with relevant statistics like its confidence interval for a given confidence level.
 
 ## Contributing
 
