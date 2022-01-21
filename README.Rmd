@@ -59,7 +59,7 @@ This is a basic example which shows you how to solve a common problem:
 
 -   calculate_boot_stats: A confidence interval for a given sampling distribution is calculated for a given confidence level.
 
--   density_ci_plot: Generates a plot showing a density curve of a given sampling distribution along with its confidence interval ci for a given alpha.
+-   histogram_ci_plot: Generates a plot showing a density curve of a given sampling distribution along with its confidence interval ci for a given alpha.
 
 -   ci_table: Generates a table that contains a given sampling distribution's mean and standard deviation along with relevant statistics like its confidence interval for a given confidence level.
 
