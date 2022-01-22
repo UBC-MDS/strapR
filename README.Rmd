@@ -48,10 +48,8 @@ devtools::install_github("UBC-MDS/strapR")
 
 This is a basic example which shows you how to solve a common problem:
 
-```{r example}
-# library("strapR")
-# density_ci_plot([1, 1, 2, 3, 5, 10]， level=0.95）
-```
+    library("strapR")
+    histogram_ci_plot([1, 1, 2, 3, 5, 10]， level=0.95）
 
 ## Function Usage
 
