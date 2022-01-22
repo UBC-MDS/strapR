@@ -5,7 +5,7 @@ Authors@R:
     person("Gordon", "Julien", "junigord@gmail.com", role = c("aut", "cre"))
     person("Tang", "Zack", "zacktang113@gmail.com", role = c("aut", "cre"))
     person("Vore", "Margot", "vore.margot@gmail.com", role = c("aut", "cre"))
-    person("Pughazhendhi", "Gautham", "placeholder@gmail.com", role = c("aut", "cre"))
+    person("Pughazhendhi", "Gautham", "gautham.pughazhendhi@gmail.com", role = c("aut", "cre"))
     
 Description: The purpose of this package is to simplify and automate the process
 of creating simple bootstrap distributions of numerical data columns.
