@@ -1,10 +1,21 @@
 Package: strapR
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Title: Bootstrapped Confidence Intervals, Plots, and More
+Version: 0.1.0
+Authors@R:
+    person("Gordon", "Julien", "junigord@gmail.com", role = c("aut", "cre"))
+    person("Tang", "Zack", "zacktang113@gmail.com", role = c("aut", "cre"))
+    person("Vore", "Margot", "vore.margot@gmail.com", role = c("aut", "cre"))
+    person("Pughazhendhi", "Gautham", "gautham.pughazhendhi@gmail.com", role = c("aut", "cre"))
+    
+Description: The purpose of this package is to simplify and automate the process
+of creating simple bootstrap distributions of numerical data columns.
+The package will have a module which intakes a dataset column and relevant
+parameters such as the desired confidence bounds and number of simulations.
+The module will perform the simulation statistics to generate the bootstrap mean
+distribution and relevant statistics such as the sample mean and bootstrapped
+confidence interval. The package will also contain a module for visualization
+of the bootstraped confidence interval, and a module for creating a
+professional publication-ready table of the relevant statistics.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
