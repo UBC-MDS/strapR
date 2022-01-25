@@ -40,14 +40,14 @@ If you are proposing a feature:
 
 ## Get Started!
 
-Ready to contribute? Here's how to set up `strapR` for local development.
+Ready to contribute? Here's how to set up `strapr` for local development.
 
-1. Download a copy of `strapR` locally.
-2. Install `strapR`:
+1. Download a copy of `strapr` locally.
+2. Install `strapr`:
 
     ```console
     # install.packages("devtools")
-    devtools::install_github("UBC-MDS/strapR")
+    devtools::install_github("UBC-MDS/strapr")
     ```
 
 3. Use `git` (or similar) to create a branch for local development and make your changes:
@@ -70,5 +70,5 @@ Before you submit a pull request, check that it meets these guidelines:
 
 ## Code of Conduct
 
-Please note that the `strapR` project is released with a 
-[`Code of Conduct`](https://github.com/UBC-MDS/strapR/blob/main/CODE_OF_CONDUCT.md). By contributing to this project you agree to abide by its terms.
+Please note that the `strapr` project is released with a 
+[`Code of Conduct`](https://github.com/UBC-MDS/strapr/blob/main/CODE_OF_CONDUCT.md). By contributing to this project you agree to abide by its terms.

@@ -1,4 +1,4 @@
 library(testthat)
-library(strapR)
+library(strapr)
 
-test_check("strapR")
+test_check("strapr")
