@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# strapR
+# strapr
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -28,7 +28,7 @@ The package will likely build on the [infer
 package](https://cran.r-project.org/web/packages/infer/index.html) or
 the [boot package](https://cran.r-project.org/web/packages/boot/), which
 allows one to conduct the boostrap sampling in the first place using the
-generate() and boot() functions. strapR will streamline and extend this
+generate() and boot() functions. strapr will streamline and extend this
 process from the pure statistical process done in this module. The
 [BootCI](https://rdrr.io/cran/DescTools/man/BootCI.html) package seems
 to streamline the confidence interval process but does not include
@@ -43,28 +43,26 @@ encourage the reader to plot the results manually.
 
 ## Installation
 
-You can install the released version of strapR from
+You can install the released version of strapr from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("strapR")
+install.packages("strapr")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("UBC-MDS/strapR")
+devtools::install_github("UBC-MDS/strapr")
 ```
 
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
 
-``` r
-# library("strapR")
-# density_ci_plot([1, 1, 2, 3, 5, 10]， level=0.95）
-```
+    library("strapr")
+    histogram_ci_plot([1, 1, 2, 3, 5, 10]， level=0.95）
 
 ## Function Usage
 
@@ -91,5 +89,5 @@ Julien Gordon, Gautham Pughazhendhi, Zack Tang, and Margot Vore.
 
 ## License
 
-\`strapR\` was created by Julien Gordon, Gautham Pughazhendhi, Zack
+\`strapr\` was created by Julien Gordon, Gautham Pughazhendhi, Zack
 Tang, Margot Vore. It is licensed under the terms of the MIT license.
