@@ -22,9 +22,9 @@
 #' @export
 #'
 #' @examples
-#' histogram_ci_plot(c(1, 2, 3, 4, 5, 6, 7), 1000 ,n=100, 
+#' plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000 ,n=100, 
 #'                   ci_level = 0.95, ci_random_seed = 123)
-histogram_ci_plot <- function(sample, rep, bin_size = 30, 
+plot_ci <- function(sample, rep, bin_size = 30, 
                               n = "auto",ci_level = 0.95, 
                               ci_random_seed = NULL, title = "", 
                               x_axis = "Bootstrap Sample Mean",
