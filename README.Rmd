@@ -59,7 +59,7 @@ This is a basic example which shows you how to solve a common problem:
 
 -   calculate_boot_stats: A confidence interval for a given sampling distribution is calculated for a given confidence level. The interval and other statistics relevant to the distribution and its creation are returned in a dictionary.
 
--   histogram_ci_plot: Plots a bootstrapped sampling distribution with its confidence interval and observed mean.
+-   ci_plot: Plots a bootstrapped sampling distribution with its confidence interval and observed mean.
 
 -   summary_tables: Generates a table that contains a given sampling distribution's mean and standard deviation along with relevant statistics like its confidence interval for a given confidence level.
 
