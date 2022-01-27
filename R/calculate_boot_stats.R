@@ -23,9 +23,8 @@
 #' calculate_boot_stats(c(1, 2, 3, 4), 1000, 1000, level = 0.95, seed = 1)
 
 calculate_boot_stats <- function(sample, rep, n = "auto", level = 0.95,
-                            estimator = mean, seed = NULL,
+                            estimator = "mean", seed = NULL,
                             pass_dist = FALSE) {
-  source("bootstrap.R")
 
   if(!is.numeric(level)) {
     stop("level should be a numeric value")
@@ -43,23 +42,67 @@ calculate_boot_stats <- function(sample, rep, n = "auto", level = 0.95,
     stop("pass_dist should be logical (TRUE or FALSE)")
   }
   
+  if(!is.character(estimator)) {
+    stop("Estimator should be a string")
+  }
+  
+  if(!(estimator %in% c("mean", "median", "var", "sd"))) {
+    stop("Supported estimators are mean, median, var, sd")
+  }
+  
   if(level < 0.7) {
     warning("Warning: chosen level is quite low--level is a confidence level,
             not a signficance level")
   }
   
-  # get the bootstrapped mean vector
+  # access the bootstrapping function
+  source("bootstrap.R")
+  
+  ESTIMATOR_LIST = list(
+    "mean" = mean,
+    "median" = median,
+    "var" = var,
+    "sd" = sd
+  )
+  
+# get the bootstrapped mean vector
   dist = bootstrap(sample=sample,
                    rep=rep,
                    n=n,
-                   estimator=mean,
+                   estimator=ESTIMATOR_LIST[[estimator]],
                    seed=seed)
-  
+
   stats_list = list(
-    "test" = dist,
-    paste("sample_", as.character(substitute(estimator)), sep = "") = 2
+    "lower" = quantile(dist, probs = (1-level)/2),
+    "upper" = quantile(dist, probs = (1 - ( (1-level)/2) )),
+    "sample_estimate" = ESTIMATOR_LIST[[estimator]](sample),
+    "std_err" = sd(dist),
+    "level" = level,
+    "sample_size" = length(sample),
+    "n" = n,
+    "rep" = rep,
+    "estimator" = estimator
   )
   
-}
+  # rename the sample estimator dynamically
+    # make sure the order of the list is correct before renaming
+    if (!(names(stats_list)[3] == "sample_estimate")) {
+      stop("third index of stats list must be the sample estimate")
+    }
+    
+    # rename
+    names(stats_list)[[3]] = paste0("sample_", estimator)
+  
+  
+  if (pass_dist == TRUE) {
+    
+    stats_list["dist"] = dist
+    return(stats_list)
+    
+  } else {
+    
+    return(stats_list)
+    
+  }
 
-x = calculate_boot_stats(c(1, 2, 3, 4), rep = 20)
+}
