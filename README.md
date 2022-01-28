@@ -27,9 +27,9 @@ table of the relevant statistics.
 The package will likely build on the [infer
 package](https://cran.r-project.org/web/packages/infer/index.html) or
 the [boot package](https://cran.r-project.org/web/packages/boot/), which
-allows one to conduct the boostrap sampling in the first place using the
-generate() and boot() functions. strapr will streamline and extend this
-process from the pure statistical process done in this module. The
+allows one to conduct the bootstrap sampling in the first place using
+the generate() and boot() functions. strapr will streamline and extend
+this process from the pure statistical process done in this module. The
 [BootCI](https://rdrr.io/cran/DescTools/man/BootCI.html) package seems
 to streamline the confidence interval process but does not include
 plotting support. While we cannot be certain that one does not exist,
@@ -78,10 +78,9 @@ This is a basic example which shows you how to solve a common problem:
 -   histogram_ci_plot: Plots a bootstrapped sampling distribution with
     its confidence interval and observed mean.
 
--   summary_tables: Generates a table that contains a given sampling
-    distribution’s mean and standard deviation along with relevant
-    statistics like its confidence interval for a given confidence
-    level.
+-   tabulate_stats: Generates two tables contains the sampling
+    distribution’s statistics and the parameters of the bootstrapping
+    method.
 
 ## Contributing
 
