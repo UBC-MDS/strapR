@@ -71,7 +71,7 @@ calculate_boot_stats <- function(sample, rep, n = "auto", level = 0.95,
                    n=n,
                    estimator=ESTIMATOR_LIST[[estimator]],
                    seed=seed)
-
+  
   stats_list = list(
     "lower" = quantile(dist, probs = (1-level)/2),
     "upper" = quantile(dist, probs = (1 - ( (1-level)/2) )),
@@ -96,7 +96,7 @@ calculate_boot_stats <- function(sample, rep, n = "auto", level = 0.95,
   
   if (pass_dist == TRUE) {
     
-    stats_list["dist"] = dist
+    stats_list["dist"] = list(dist)
     return(stats_list)
     
   } else {
