@@ -31,3 +31,8 @@ test_that("Check if error thrown for invalid save_result_to input", {
 })
 
 
+test_that("Check the output is a ggplot object", {
+  expect_equal(is(plot_ci(c(1, 2, 3), 1000),
+                  "ggplot"),
+               TRUE)
+})
