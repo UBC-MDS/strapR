@@ -1,6 +1,6 @@
 test_that("Check if error thrown for invalid title input", {
   expect_error(plot_ci(c(1, 2, 3), 1000,
-                       n=100, 
+                       n = 100, 
                        ci_level = 0.95, 
                        ci_random_seed = 123, 
                        title = 123))
