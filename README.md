@@ -61,8 +61,11 @@ devtools::install_github("UBC-MDS/strapr")
 
 This is a basic example which shows you how to solve a common problem:
 
-    library("strapr")
-    histogram_ci_plot([1, 1, 2, 3, 5, 10]， level=0.95）
+
+``` r
+# library("strapR")
+# plot_ci([1, 2, 3, 4, 5, 6, 7], 1000, n = 100, ci_level = 0.95, ci_random_seed = 123)
+```
 
 ## Function Usage
 
@@ -75,7 +78,7 @@ This is a basic example which shows you how to solve a common problem:
     interval and other statistics relevant to the distribution and its
     creation are returned in a dictionary.
 
--   histogram_ci_plot: Plots a bootstrapped sampling distribution with
+-   plot_ci: Plots a bootstrapped sampling distribution with
     its confidence interval and observed mean.
 
 -   tabulate_stats: Generates two tables contains the sampling

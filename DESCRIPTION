@@ -28,3 +28,4 @@ Imports:
     dplyr,
     knitr,
     kableExtra
+    dev
