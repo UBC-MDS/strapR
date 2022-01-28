@@ -56,7 +56,7 @@ calculate_boot_stats <- function(sample, rep, n = "auto", level = 0.95,
   }
 
   # access the bootstrapping function
-  # source("bootstrap.R")
+  source("bootstrap.R")
 
   ESTIMATOR_LIST = list(
     "mean" = mean,
