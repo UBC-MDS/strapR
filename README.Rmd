@@ -62,7 +62,7 @@ This is a basic example which shows you how to solve a common problem:
 
 -   plot_ci: Plots a bootstrapped sampling distribution with its confidence interval and observed mean.
 
--   summary_tables: Generates a table that contains a given sampling distribution's mean and standard deviation along with relevant statistics like its confidence interval for a given confidence level.
+-   tabulate_stats: Generates two tables contains the sampling distribution's statistics and the parameters of the bootstrapping method.
 
 ## Contributing
 
