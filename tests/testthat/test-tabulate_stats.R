@@ -37,7 +37,7 @@ test_that("Check if handeling when n ='auto' correctly" , {
   expect_equal(params[[1, "Sample Size"]], st$sample_size)
 })
 
-st_changen= calculate_boot_stats(c(1:15), 1000,level = 0.95, n=9,seed = 1)
+st_changen <- calculate_boot_stats(c(1:15), 1000,level = 0.95, n=9,seed = 1)
 final_tables <- tabulate_stats(st_changen)
 stats <- final_tables[[1]]
 params <- final_tables[[2]]
