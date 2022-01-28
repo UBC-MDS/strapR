@@ -10,15 +10,13 @@
 #'             by the `bootstrap_stats` function
 #' @param precision A integer value for the precision of the
 #'                  table values
-#' @param estimator A logical indicating if we are to include the bootstrap
-#'                  estimate in the summary statistics table
 #' @param save  A logical indicating if tables should  be saved as a png to disk
 #'
 #'  @param folder_path A character vector with the path to where the tables are
 #'                     to be saved to
 #'
-#' @return a list containing 2 table objects:  table 1- summary statistics
-#'          table 2- bootstraping parameters
+#' @return a list containing 2 tibble objects:  table 1- summary statistics
+#'          table 2- bootstrapping parameters
 #' @export
 #'
 #' @examples
@@ -27,24 +25,37 @@
 #' result  <-  tabulate_stats(st)
 #' result[1] # stats table
 #' result[2] # parameter table
-tabulate_stats <- function(stat_list, precision=2, estimator=TRUE,
-                           save = FALSE, folder_path="") {
+tabulate_stats <- function(stat_list, precision=2, save = FALSE, folder_path="") {
+
+  if ("dist" %in% names(stat_list)) {
+    stat_list = within(stat_list, rm(dist))
+  }
+
+  summary <- dplyr::as_tibble(stat_list)
+
+
 
   if(!is.character(folder_path)) {
     stop("path the folder should be a character vector")
   }
 
 
-  if(!is.integer(precision) | preision <0) {
+  if(precision%%1!=0 | precision < 0) {
     stop("Precision paramter should be a positive integer")
   }
 
-  if(!is.logical(estimator) | !is.logical(alpha) | !is.logical(save)) {
-    stop("The estimator, alpha and save parameters should be TRUE or FALSE")
+  if(!is.logical(save)) {
+    stop("The save parameters should be TRUE or FALSE")
   }
 
   if (is.null(summary$estimator)==TRUE){
     stop("stat_list needs to be list outputted from the bootstrap_stats() function")
+  }
+
+  if (folder_path != ""){
+    if(dir.exists(folder_path)==FALSE){
+      stop("The path you want to save your tables to doesn't exist")
+    }
   }
 
   esti <- paste0("sample_", summary$estimator)
@@ -58,72 +69,77 @@ tabulate_stats <- function(stat_list, precision=2, estimator=TRUE,
          outputted from the bootstrap_stats() function")
   }
 
-  summary <- as_tibble(stat_list)
 
-  if (estimator == TRUE){
-    esti <- paste0("sample_",summary$estimator)
-    Name <- paste0("Sample ",summary$estimator)
-    stat_summary <- summary |>
-      select(lower,upper, std_err, {{ esti }}) |>
-      mutate(across(where(is.numeric), round, precision)) |>
-      rename("Lower Bound CI"=lower,
-             "Upper Bound CI" = upper,
-             "Standard Error"=std_err)
 
-    if (summary$estimator=="mean"){
-      stat_summary <- stat_summary |>
-        rename("Sample Mean" = {{ esti }})
-    } else if (summary$estimator=="median") {
-      stat_summary <- stat_summary |>
-        rename("Sample Median" = {{ esti }})
-    } else if (summary$estimator=="var") {
-      stat_summary <- stat_summary |>
-        rename("Sample Variance" = {{ esti }})
-    } else if (summary$estimator=="sd") {
-      stat_summary <- stat_summary |>
-        rename("Sample Standard Deviation" = {{ esti }})
-    }
 
+  esti <- paste0("sample_",summary$estimator)
+  Name <- paste0("Sample ",summary$estimator)
+  stat_summary <- summary |>
+    dplyr::select({{ esti }},lower,upper, std_err) |>
+    dplyr::mutate(dplyr::across(where(is.numeric), round, precision)) |>
+    dplyr::rename("Lower Bound CI"=lower,
+           "Upper Bound CI" = upper,
+           "Standard Error"=std_err)
+
+  if (summary$estimator=="mean"){
+    stat_summary <- stat_summary |>
+      dplyr::rename("Sample Mean" = {{ esti }})
+  } else if (summary$estimator=="median") {
+    stat_summary <- stat_summary |>
+      dplyr::rename("Sample Median" = {{ esti }})
+  } else if (summary$estimator=="var") {
+    stat_summary <- stat_summary |>
+      dplyr::rename("Sample Variance" = {{ esti }})
+  } else if (summary$estimator=="sd") {
+    stat_summary <- stat_summary |>
+      dplyr::rename("Sample Standard Deviation" = {{ esti }})
   }
 
-  caption= paste0("Bootstrapping sample statistics from sample with ",
-                  summary$n," records")
-  st_table <- knitr::kable(stat_summary, output = FALSE,
-                           caption = caption) |>
-    kable_paper("hover", full_width = F)
+  if (summary$n=="auto"){
+    ss = summary$sample_size
+  } else {
+    ss= summary$n
+  }
 
-  if (save == TRUE){
-    save_kable(st_table, file = paste0(folder_path,"Sampling_Statistics.png"))
+
+  if (save == TRUE | folder_path != ""){
+    caption= paste0("Bootstrapping sample statistics from sample with ",
+                    ss," records")
+    stat_summary |>
+      knitr::kable(output = FALSE, caption = caption) |>
+      kableExtra::kable_styling() |>
+      kableExtra::as_image(file=paste0(folder_path,"Sampling_Statistics.png"))
   }
 
 
   if (summary$n !=  "auto"){
     bootstrap_summary =  summary |>
-      select(sample_size, rep,level,n) |>
-      mutate(level = round(1-level,3)) |>
-      rename("Sample Size"=sample_size,
+      dplyr::select(sample_size, rep,level,n) |>
+      dplyr::mutate(level = round(1-level,3)) |>
+      dplyr::rename("Sample Size"=sample_size,
              "Repetitons"=rep,
              "Significance Level"=level,
              "Samples per Bootstrap"= n)
   } else {
     bootstrap_summary =  summary |>
-      select(sample_size, rep,level) |>
-      mutate(level = round(1-level,3)) |>
-      rename("Sample Size"=sample_size,
+      dplyr::select(sample_size, rep,level) |>
+      dplyr::mutate(level = round(1-level,3)) |>
+      dplyr::rename("Sample Size"=sample_size,
              "Repetitons"=rep,
              "Significance Level"=level)
   }
 
-  caption= paste0("Bootstrapping Parameters ")
-  bs_table <- knitr::kable(bootstrap_summary, output = FALSE,
-                           caption = caption) |>
-    kable_paper("hover", full_width = F)
 
-  if (save == TRUE){
-    save_kable(bs_table, file = paste0(folder_path,"Bootstrap_parameter_table.png"))
+
+  if (save == TRUE | folder_path != ""){
+    caption= paste0("Bootstrapping Parameters ")
+    bootstrap_summary |>
+      knitr::kable(output = FALSE, caption = caption) |>
+      kableExtra::kable_styling() |>
+      kableExtra::as_image(file=paste0(folder_path,"Bootsrapping_table.png"))
   }
 
-  return(list(st_table, bs_table))
+  return(list(stat_summary, bootstrap_summary))
 }
 
 
