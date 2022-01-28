@@ -31,7 +31,6 @@
 #'                  save_result_to = "../")
 
 library(ggplot2, quietly = TRUE)
-library(tidyverse, quietly = TRUE)
 
 plot_ci <- function(sample, rep, bin_size = 30, 
                               n = "auto",ci_level = 0.95, 
@@ -57,8 +56,6 @@ plot_ci <- function(sample, rep, bin_size = 30,
     stop("save_result_to should be a character vector")
   }
   
-  # access the calculate_boot_stats function
-  source("calculate_boot_stats.R")
   
   sample_stat_dict <- calculate_boot_stats(sample, 
                                           rep, 
@@ -78,7 +75,7 @@ plot_ci <- function(sample, rep, bin_size = 30,
                             bins = bin_size) +
     ggplot2::labs(x = x_axis, 
                   y = y_axis) +
-    ggplot2::theme(text = element_text(size = 16.5)) +
+    ggplot2::theme(text = ggplot2::element_text(size = 16.5)) +
     ggplot2::geom_vline(xintercept = sample_stat_dict$sample_mean, 
                         colour = "red", 
                         size = 1) + 
@@ -97,21 +94,21 @@ plot_ci <- function(sample, rep, bin_size = 30,
   annotated_plot <- bootstrap_dist_ci +
     ggplot2::annotate(geom="label", 
                       x = sample_stat_dict$sample_mean, 
-                      y = 0.9 * ggplot_build(bootstrap_dist_ci)$layout$panel_params[[1]]$y.range[2],
+                      y = 0.9 * ggplot2::ggplot_build(bootstrap_dist_ci)$layout$panel_params[[1]]$y.range[2],
                       label = paste(str_1, "+/-", str_2), 
                       size = 3, 
                       color = "red",
                       fill=" lightgrey") + 
     ggplot2::annotate(geom="label", 
                       x = unname(sample_stat_dict$lower), 
-                      y = 0.9 * ggplot_build(bootstrap_dist_ci)$layout$panel_params[[1]]$y.range[2], 
+                      y = 0.9 * ggplot2::ggplot_build(bootstrap_dist_ci)$layout$panel_params[[1]]$y.range[2], 
                       label = (toString(round(unname(sample_stat_dict$lower), 2))), 
                       size = 3, 
                       color = "purple",
                       fill=" lightgrey") +
     ggplot2::annotate(geom="label", 
                       x = unname(sample_stat_dict$upper), 
-                      y = 0.9 * ggplot_build(bootstrap_dist_ci)$layout$panel_params[[1]]$y.range[2], 
+                      y = 0.9 * ggplot2::ggplot_build(bootstrap_dist_ci)$layout$panel_params[[1]]$y.range[2], 
                       label = (toString(round(unname(sample_stat_dict$upper), 2))), 
                       size = 3, 
                       color = "purple",
