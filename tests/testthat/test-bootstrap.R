@@ -13,10 +13,6 @@ test_that("Check if error thrown for invalid n input", {
   expect_error(bootstrap(c(1, 2, 3), 3, "catch me"))
 })
 
-test_that("Check if error thrown for invalid estimator input", {
-  expect_error(bootstrap(c(1, 2, 3), 3, summary))
-})
-
 test_that("Check if error thrown for invalid seed input", {
   expect_error(bootstrap(c(1, 2, 3), 3, 3, seed = -1))
 })
