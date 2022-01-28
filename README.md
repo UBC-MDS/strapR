@@ -64,7 +64,7 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 # library("strapR")
-# plot_ci([1, 2, 3, 4, 5, 6, 7], 1000, n=100, ci_level=0.95, ci_random_seed=123)
+# plot_ci([1, 2, 3, 4, 5, 6, 7], 1000, n = 100, ci_level = 0.95, ci_random_seed = 123)
 ```
 
 ## Function Usage
