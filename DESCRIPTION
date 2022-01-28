@@ -27,5 +27,5 @@ Imports:
     tibble,
     dplyr,
     knitr,
-    kableExtra
+    kableExtra,
     dev
