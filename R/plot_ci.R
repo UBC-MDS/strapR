@@ -1,3 +1,4 @@
+library(ggplot2)
 #' Plots a bootstrapped sampling distribution with its confidence 
 #' interval and observed mean.
 #'
@@ -58,13 +59,13 @@ plot_ci <- function(sample, rep, bin_size = 30,
   
   sample_stat_dict <- calculate_boot_stats(sample, 
                                           rep, 
-                                          level=ci_level, 
+                                          level = ci_level, 
                                           seed = ci_random_seed, 
-                                          pass_dist=TRUE)
+                                          pass_dist = TRUE)
   
   bootstrap_dist <- data.frame(matrix(unlist(sample_stat_dict$dist), 
-                                      nrow=length(sample_stat_dict$dist), 
-                                      byrow=TRUE))
+                                      nrow = length(sample_stat_dict$dist), 
+                                      byrow = TRUE))
   
   colnames(bootstrap_dist) <- c("sample_m")
   
