@@ -30,9 +30,4 @@ test_that("Check if error thrown for invalid save_result_to input", {
                        save_result_to = 123))
 })
 
-test_that("Check if a ggplot object was created", {
-  expect_equal(is(plot_ci(c(1, 2, 3), 1000,
-             n=100, 
-             ci_level = 0.95, 
-             ci_random_seed = 123), "ggplot"), TRUE)
-})
+
