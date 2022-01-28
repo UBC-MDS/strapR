@@ -119,7 +119,7 @@ plot_ci <- function(sample, rep, bin_size = 30,
                   plot = annotated_plot,
                   path = save_result_to)
 
-  return(annotated_plot)
+  annotated_plot
 }
 
 
