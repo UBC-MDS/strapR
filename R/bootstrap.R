@@ -46,11 +46,6 @@ bootstrap <- function(sample, rep, n = "auto", estimator = mean,
     stop("estimator should be of type 'function'")
   }
 
-  if(!(as.character(substitute(estimator))
-       %in% c("mean", "median", "var", "sd"))) {
-    stop("Supported estimators are mean, median, var, sd")
-  }
-
   if(!(is.null(seed) || is.numeric(seed))) {
     stop("seed should be NULL or of type 'numeric'")
   }
