@@ -88,7 +88,7 @@ plot_ci <- function(sample, rep, bin_size = 30, n = "auto", ci_level = 0.95,
   annotated_plot <- bootstrap_dist_ci +
     ggplot2::annotate(geom="label", x = sample_stat_dict$sample_mean, 
                       y = 0.9 * y_max, label = paste(str_1, "+/-", str_2), 
-                      size = 3, color = "red", fill=" lightgrey") + 
+                      size = 3, color = "red", fill = " lightgrey") + 
     ggplot2::annotate(geom="label",  x = unname(sample_stat_dict$lower), 
                       y = 0.9 * y_max, label = lower_label, size = 3, 
                       color = "purple", fill = " lightgrey") +
