@@ -2,10 +2,10 @@ Package: strapr
 Title: Bootstrapped Confidence Intervals, Plots, and More
 Version: 0.1.0
 Authors@R:
-    person("Gordon", "Julien", "junigord@gmail.com", role = c("aut", "cre"))
-    person("Tang", "Zack", "zacktang113@gmail.com", role = c("aut", "cre"))
-    person("Vore", "Margot", "vore.margot@gmail.com", role = c("aut", "cre"))
-    person("Pughazhendhi", "Gautham", "gautham.pughazhendhi@gmail.com", role = c("aut", "cre"))
+    person("Gordon", "Julien", , "junigord@gmail.com", role = c("aut", "cre"))
+    person("Tang", "Zack", , "zacktang113@gmail.com", role = c("aut", "cre"))
+    person("Vore", "Margot", , "vore.margot@gmail.com", role = c("aut", "cre"))
+    person("Pughazhendhi", "Gautham", , "gautham.pughazhendhi@gmail.com", role = c("aut", "cre"))
 Description: The purpose of this package is to simplify and automate the process 
     of creating simple bootstrap distributions of numerical data columns. 
     The package will have a module which intakes a dataset column and relevant 
@@ -28,4 +28,4 @@ Imports:
     dplyr,
     knitr,
     kableExtra,
-    dev
+    ggplot2

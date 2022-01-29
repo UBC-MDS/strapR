@@ -7,12 +7,12 @@
 #' also returned.
 #'
 #' @param stat_list A named list of the summary statistics produced
-#'             by the `bootstrap_stats` function
+#'             by the `calculate_boot_stats` function
 #' @param precision A integer value for the precision of the
 #'                  table values
 #' @param save  A logical indicating if tables should  be saved as a png to disk
 #'
-#'  @param folder_path A character vector with the path to where the tables are
+#' @param folder_path A character vector with the path to where the tables are
 #'                     to be saved to
 #'
 #' @return a list containing 2 tibble objects:  table 1- summary statistics
@@ -20,8 +20,8 @@
 #' @export
 #'
 #' @examples
-#' st <- bootstrap_stats([1, 2, 3, 4], 1000, level=0.95,
-#'                       random_seed=123)
+#' st <- calculate_boot_stats(c(1, 2, 3, 4), 1000, level=0.95,
+#'                       seed=123)
 #' result  <-  tabulate_stats(st)
 #' result[1] # stats table
 #' result[2] # parameter table
@@ -49,7 +49,7 @@ tabulate_stats <- function(stat_list, precision=2, save = FALSE, folder_path="")
   }
 
   if (is.null(summary$estimator)==TRUE){
-    stop("stat_list needs to be list outputted from the bootstrap_stats() function")
+    stop("stat_list needs to be list outputted from the calculate_boot_stats() function")
   }
 
   if (folder_path != ""){
@@ -66,11 +66,8 @@ tabulate_stats <- function(stat_list, precision=2, save = FALSE, folder_path="")
 
   if(all(name_check=!TRUE)){
     stop("stat_list paramter needs to be  the list
-         outputted from the bootstrap_stats() function")
+         outputted from the calculate_boot_stats() function")
   }
-
-
-
 
   esti <- paste0("sample_",summary$estimator)
   Name <- paste0("Sample ",summary$estimator)
