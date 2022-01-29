@@ -63,11 +63,11 @@ calculate_boot_stats <- function(sample, rep, n = "auto", level = 0.95,
   )
 
 # get the bootstrapped mean vector
-  dist <- bootstrap(sample=sample,
-                   rep=rep,
-                   n=n,
-                   estimator=estimator_list[[estimator]],
-                   seed=seed)
+  dist <- bootstrap(sample = sample,
+                   rep = rep,
+                   n = n,
+                   estimator = estimator_list[[estimator]],
+                   seed = seed)
 
   stats_list <- list(
     "lower" = quantile(dist, probs = (1-level)/2),
