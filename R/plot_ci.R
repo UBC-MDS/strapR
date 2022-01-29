@@ -94,7 +94,7 @@ plot_ci <- function(sample, rep, bin_size = 30, n = "auto", ci_level = 0.95,
                       color = "purple", fill = " lightgrey") +
     ggplot2::annotate(geom="label", x = unname(sample_stat_dict$upper), 
                       y = 0.9 * y_max, label = upper_label, size = 3, 
-                      color = "purple", fill=" lightgrey") +
+                      color = "purple", fill = " lightgrey") +
     ggplot2::ggtitle(title)
   
   ggplot2::ggsave(filename = paste(title, ".png"), plot = annotated_plot,
