@@ -31,7 +31,7 @@
 
 plot_ci <- function(sample, rep, bin_size = 30, n = "auto", ci_level = 0.95, 
                     ci_random_seed = NULL, title = "Bootstrap Sampling Plot", 
-                    x_axis = "Bootstrap Sample Mean",y_axis = "Count", 
+                    x_axis = "Bootstrap Sample Mean", y_axis = "Count", 
                     save_result_to = ".") {
   
   if(!is.character(title)) {
