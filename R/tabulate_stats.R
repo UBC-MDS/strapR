@@ -20,8 +20,7 @@
 #' @export
 #'
 #' @examples
-#' st <- calculate_boot_stats(c(1, 2, 3, 4), 1000, level=0.95,
-#'                       seed=123)
+#' st <- calculate_boot_stats(c(1, 2, 3, 4), 1000, level = 0.95, seed=123)
 #' result  <-  tabulate_stats(st)
 #' result[[1]] # stats table
 #' result[[2]] # parameter table
@@ -60,11 +59,11 @@ tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
     }
   }
 
-  esti <- paste0("sample_", summary$estimator)
+  estimator <- paste0("sample_", summary$estimator)
   name_check <- lapply(names(summary),
          "%in%",
          c("lower","upper","std_err", "level","sample_size","n",
-           "rep","estimator", esti))
+           "rep","estimator", estimator))
 
 
   if(all(name_check=!TRUE)){
@@ -72,10 +71,10 @@ tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
          outputted from the calculate_boot_stats() function")
   }
 
-  esti <- paste0("sample_", summary$estimator)
+
   Name <- paste0("Sample ", summary$estimator)
   stat_summary <- summary |>
-    dplyr::select({{ esti }}, lower, upper, std_err) |>
+    dplyr::select({{ estimator }}, lower, upper, std_err) |>
     dplyr::mutate(dplyr::across(where(is.numeric), round, precision)) |>
     dplyr::rename("Lower Bound CI" = lower,
            "Upper Bound CI" = upper,
@@ -83,16 +82,16 @@ tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
 
   if (summary$estimator == "mean"){
     stat_summary <- stat_summary |>
-      dplyr::rename("Sample Mean" = {{ esti }})
+      dplyr::rename("Sample Mean" = {{ estimator }})
   } else if (summary$estimator == "median") {
     stat_summary <- stat_summary |>
-      dplyr::rename("Sample Median" = {{ esti }})
+      dplyr::rename("Sample Median" = {{ estimator}})
   } else if (summary$estimator == "var") {
     stat_summary <- stat_summary |>
-      dplyr::rename("Sample Variance" = {{ esti }})
+      dplyr::rename("Sample Variance" = {{ estimator }})
   } else if (summary$estimator == "sd") {
     stat_summary <- stat_summary |>
-      dplyr::rename("Sample Standard Deviation" = {{ esti }})
+      dplyr::rename("Sample Standard Deviation" = {{ estimator }})
   }
 
   if (summary$n == "auto"){

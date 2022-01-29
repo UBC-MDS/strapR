@@ -30,9 +30,8 @@ Other stats and parameters of the distribution and sample are
 also returned.
 }
 \examples{
-st <- calculate_boot_stats(c(1, 2, 3, 4), 1000, level=0.95,
-                      seed=123)
+st <- calculate_boot_stats(c(1, 2, 3, 4), 1000, level = 0.95, seed=123)
 result  <-  tabulate_stats(st)
-result[1] # stats table
-result[2] # parameter table
+result[[1]] # stats table
+result[[2]] # parameter table
 }
