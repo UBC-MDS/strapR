@@ -91,7 +91,7 @@ plot_ci <- function(sample, rep, bin_size = 30, n = "auto", ci_level = 0.95,
                       size = 3, color = "red", fill=" lightgrey") + 
     ggplot2::annotate(geom="label",  x = unname(sample_stat_dict$lower), 
                       y = 0.9 * y_max, label = lower_label, size = 3, 
-                      color = "purple", fill=" lightgrey") +
+                      color = "purple", fill = " lightgrey") +
     ggplot2::annotate(geom="label", x = unname(sample_stat_dict$upper), 
                       y = 0.9 * y_max, label = upper_label, size = 3, 
                       color = "purple", fill=" lightgrey") +
