@@ -54,11 +54,8 @@ calculate_boot_stats <- function(sample, rep, n = "auto", level = 0.95,
     warning("Warning: chosen level is quite low--level is a confidence level,
             not a signficance level")
   }
-
-  # access the bootstrapping function
-  source("bootstrap.R")
-
-  ESTIMATOR_LIST = list(
+  
+  estimator_list <- list(
     "mean" = mean,
     "median" = median,
     "var" = var,
@@ -66,16 +63,16 @@ calculate_boot_stats <- function(sample, rep, n = "auto", level = 0.95,
   )
 
 # get the bootstrapped mean vector
-  dist = bootstrap(sample=sample,
-                   rep=rep,
-                   n=n,
-                   estimator=ESTIMATOR_LIST[[estimator]],
-                   seed=seed)
+  dist <- bootstrap(sample = sample,
+                   rep = rep,
+                   n = n,
+                   estimator = estimator_list[[estimator]],
+                   seed = seed)
 
-  stats_list = list(
+  stats_list <- list(
     "lower" = quantile(dist, probs = (1-level)/2),
     "upper" = quantile(dist, probs = (1 - ( (1-level)/2) )),
-    "sample_estimate" = ESTIMATOR_LIST[[estimator]](sample),
+    "sample_estimate" = estimator_list[[estimator]](sample),
     "std_err" = sd(dist),
     "level" = level,
     "sample_size" = length(sample),
@@ -91,12 +88,12 @@ calculate_boot_stats <- function(sample, rep, n = "auto", level = 0.95,
     }
 
     # rename
-    names(stats_list)[[3]] = paste0("sample_", estimator)
+    names(stats_list)[[3]] <- paste0("sample_", estimator)
 
 
   if (pass_dist == TRUE) {
 
-    stats_list["dist"] = list(dist)
+    stats_list["dist"] <- list(dist)
     return(stats_list)
 
   } else {

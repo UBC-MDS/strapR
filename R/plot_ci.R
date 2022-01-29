@@ -30,7 +30,7 @@
 #'                  ci_level = 0.95, ci_random_seed = 123, 
 #'                  save_result_to = "../")
 
-library(ggplot2, quietly = TRUE)
+# library(ggplot2, quietly = TRUE)
 
 plot_ci <- function(sample, rep, bin_size = 30, 
                               n = "auto",ci_level = 0.95, 
