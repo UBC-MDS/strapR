@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# strapR
+# strapr
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -24,12 +24,12 @@ table of the relevant statistics.
 
 ## **Package context within the R ecosystem**
 
-The package will likely build on the [infer
-package](https://cran.r-project.org/web/packages/infer/index.html) or
+The package builds conceptually on the [infer
+package](https://cran.r-project.org/web/packages/infer/index.html) and
 the [boot package](https://cran.r-project.org/web/packages/boot/), which
-allows one to conduct the boostrap sampling in the first place using the
-generate() and boot() functions. strapR will streamline and extend this
-process from the pure statistical process done in this module. The
+allows one to conduct the bootstrap sampling using the generate() and
+boot() functions. strapr will streamline and extend this process from
+the pure statistical process done in these modules. The
 [BootCI](https://rdrr.io/cran/DescTools/man/BootCI.html) package seems
 to streamline the confidence interval process but does not include
 plotting support. While we cannot be certain that one does not exist,
@@ -43,26 +43,28 @@ encourage the reader to plot the results manually.
 
 ## Installation
 
-You can install the released version of strapR from
+You can install the released version of strapr from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("strapR")
+install.packages("strapr")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("UBC-MDS/strapR")
+devtools::install_github("UBC-MDS/strapr")
 ```
 
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
 
-    library("strapR")
-    histogram_ci_plot([1, 1, 2, 3, 5, 10]， level=0.95）
+``` r
+# library("strapR")
+# plot_ci([1, 2, 3, 4, 5, 6, 7], 1000, n = 100, ci_level = 0.95, ci_random_seed = 123)
+```
 
 ## Function Usage
 
@@ -75,13 +77,12 @@ This is a basic example which shows you how to solve a common problem:
     interval and other statistics relevant to the distribution and its
     creation are returned in a dictionary.
 
--   histogram_ci_plot: Plots a bootstrapped sampling distribution with
-    its confidence interval and observed mean.
+-   plot_ci: Plots a bootstrapped sampling distribution with its
+    confidence interval and observed mean.
 
--   summary_tables: Generates a table that contains a given sampling
-    distribution’s mean and standard deviation along with relevant
-    statistics like its confidence interval for a given confidence
-    level.
+-   tabulate_stats: Generates two tables contains the sampling
+    distribution’s statistics and the parameters of the bootstrapping
+    method.
 
 ## Contributing
 
@@ -89,5 +90,5 @@ Julien Gordon, Gautham Pughazhendhi, Zack Tang, and Margot Vore.
 
 ## License
 
-\`strapR\` was created by Julien Gordon, Gautham Pughazhendhi, Zack
+\`strapr\` was created by Julien Gordon, Gautham Pughazhendhi, Zack
 Tang, Margot Vore. It is licensed under the terms of the MIT license.
