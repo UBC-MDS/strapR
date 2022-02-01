@@ -2,8 +2,8 @@
 % Please edit documentation in R/plot_ci.R
 \name{plot_ci}
 \alias{plot_ci}
-\title{Plots a bootstrapped sampling distribution with its confidence
-interval and observed mean.}
+\title{Plots a bootstrapped sampling distribution with its confidence interval and
+observed mean.}
 \usage{
 plot_ci(
   sample,
@@ -23,11 +23,10 @@ plot_ci(
 
 \item{rep}{A integer vector for number of replicates}
 
-\item{bin_size}{A integer vector for number of bins representing
-intervals of equal size over the range}
+\item{bin_size}{A integer vector for number of bins representing intervals of
+equal size over the range}
 
-\item{n}{A integer or character vector for the size of bootstrap
-samples}
+\item{n}{A integer or character vector for the size of bootstrap samples}
 
 \item{ci_level}{A numeric vector for the confidence level}
 
@@ -39,22 +38,21 @@ samples}
 
 \item{y_axis}{A character vector for the name of the y axis}
 
-\item{save_result_to}{A character vector for the path to directory
-from current directory to save plot}
+\item{save_result_to}{A character vector for the path to directory from
+current directory to save plot}
 }
 \value{
 ggplot object
 }
 \description{
-A bootstrapped confidence interval for the desired estimator for
-the provided sample is calculated for a confidence level \code{level}.
+A bootstrapped confidence interval for the desired estimator for the provided
+sample is calculated for a confidence level \code{level}.
+}
+\details{
 Other stats and parameters of the distribution and sample are
 also returned.
 }
 \examples{
-plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, 
-                  ci_level = 0.95, ci_random_seed = 123)
-plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, 
-                 ci_level = 0.95, ci_random_seed = 123, 
-                 save_result_to = "../")
+plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, ci_level = 0.95)
+plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, save_result_to = "../")
 }
