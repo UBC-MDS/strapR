@@ -50,7 +50,9 @@ plot_ci <- function(sample, rep, bin_size = 30, n = "auto", ci_level = 0.95,
     stop("save_result_to should be a character vector")
   }
   
-  
+  # Declaring variables to avoid notes in check()
+  sample_m <- ggplot2::aes(sample_m)
+    
   sample_stat_dict <- calculate_boot_stats(sample, rep, level = ci_level, 
                                           seed = ci_random_seed, 
                                           pass_dist = TRUE)
@@ -61,7 +63,7 @@ plot_ci <- function(sample, rep, bin_size = 30, n = "auto", ci_level = 0.95,
   
   colnames(bootstrap_dist) <- c("sample_m")
   
-  bootstrap_dist_ci <- ggplot2::ggplot(bootstrap_dist, ggplot2::aes(sample_m)) +
+  bootstrap_dist_ci <- ggplot2::ggplot(bootstrap_dist, sample_m) +
     ggplot2::geom_histogram(fill = "dodgerblue3", color = "lightgrey", 
                             bins = bin_size) +
     ggplot2::labs(x = x_axis, y = y_axis) +

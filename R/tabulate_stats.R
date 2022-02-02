@@ -26,8 +26,19 @@
 #' result[[2]] # parameter table
 tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
                            folder_path = "") {
+  
+  # Declaring variables and functions to address check() notes
+  dist <- NULL
+  where <- tidyselect::vars_select_helpers$where
+  lower <- stat_list["lower"]
+  upper <- stat_list["upper"]
+  std_err <- stat_list["std_err"]
+  sample_size <- stat_list["sample_size"]
+  level <- stat_list["level"]
+  n <- stat_list["n"]
 
   if ("dist" %in% names(stat_list)) {
+    dist <- stat_list["dist"]
     stat_list <- within(stat_list, rm(dist))
   }
 
