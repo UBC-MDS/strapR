@@ -13,7 +13,7 @@
 #'                 equal size over the range
 #' @param n A integer or character vector for the size of bootstrap samples
 #' @param level A numeric vector for the confidence level
-#' @param random_seed A integer vector as random seed. 
+#' @param seed A integer vector as seed. 
 #' @param title A character vector for the title of the histogram
 #' @param y_axis A character vector for the name of the y axis
 #' @param estimator A character vector containing one of the("mean", "median", 
@@ -29,7 +29,7 @@
 #' plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, path = "../")
 
 plot_ci <- function(sample, rep, bin_size = 30, n = "auto", level = 0.95, 
-                    random_seed = NULL, title = "", y_axis = "Count", 
+                    seed = NULL, title = "", y_axis = "Count", 
                     estimator = "mean", path = NULL) {
   
   if(!is.character(title)) {
@@ -53,7 +53,7 @@ plot_ci <- function(sample, rep, bin_size = 30, n = "auto", level = 0.95,
   }
   
   sample_stat_dict <- calculate_boot_stats(sample, rep, level = level, 
-                                           seed = random_seed, 
+                                           seed = seed, 
                                            estimator = estimator, 
                                            pass_dist = TRUE)
   
