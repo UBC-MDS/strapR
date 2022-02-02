@@ -26,7 +26,7 @@
 #' result[[2]] # parameter table
 tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
                            folder_path = "") {
-  
+
   # Declaring variables and functions to address check() notes
   dist <- NULL
   where <- tidyselect::vars_select_helpers$where
@@ -83,7 +83,6 @@ tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
   }
 
 
-  Name <- paste0("Sample ", summary$estimator)
   stat_summary <- summary |>
     dplyr::select({{ estimator }}, lower, upper, std_err) |>
     dplyr::mutate(dplyr::across(where(is.numeric), round, precision)) |>
