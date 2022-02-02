@@ -1,4 +1,4 @@
-Package: strapr
+Package: strapvizr
 Title: Bootstrapped Confidence Intervals, Plots, and More
 Version: 0.1.0
 Authors@R:
@@ -21,6 +21,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Suggests: 
+    covr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
@@ -28,4 +29,5 @@ Imports:
     dplyr,
     knitr,
     kableExtra,
-    ggplot2
+    ggplot2,
+    tidyselect

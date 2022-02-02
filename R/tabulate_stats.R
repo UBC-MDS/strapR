@@ -27,18 +27,26 @@
 tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
                            folder_path = "") {
 
+  # Declaring variables and functions to address check() notes
+  dist <- NULL
+  where <- tidyselect::vars_select_helpers$where
+  lower <- stat_list["lower"]
+  upper <- stat_list["upper"]
+  std_err <- stat_list["std_err"]
+  sample_size <- stat_list["sample_size"]
+  level <- stat_list["level"]
+  n <- stat_list["n"]
+
   if ("dist" %in% names(stat_list)) {
+    dist <- stat_list["dist"]
     stat_list <- within(stat_list, rm(dist))
   }
 
   summary <- dplyr::as_tibble(stat_list)
 
-
-
   if(!is.character(folder_path)) {
     stop("path the folder should be a character vector")
   }
-
 
   if(precision%%1 != 0 | precision < 0) {
     stop("Precision paramter should be a positive integer")
@@ -48,7 +56,7 @@ tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
     stop("The save parameters should be TRUE or FALSE")
   }
 
-  if (is.null(summary$estimator)==TRUE){
+  if (!(c("estimator") %in% colnames(summary))){
     stop("stat_list needs to be list outputted from the
          calculate_boot_stats() function")
   }
@@ -71,8 +79,6 @@ tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
          outputted from the calculate_boot_stats() function")
   }
 
-
-  Name <- paste0("Sample ", summary$estimator)
   stat_summary <- summary |>
     dplyr::select({{ estimator }}, lower, upper, std_err) |>
     dplyr::mutate(dplyr::across(where(is.numeric), round, precision)) |>
