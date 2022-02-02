@@ -65,6 +65,7 @@ test_that("check level error is throwing properly", {
   expect_error(calculate_boot_stats(c(1, 2, 3), 100, level=1))
   expect_error(calculate_boot_stats(c(1, 2, 3), 100, level=0))
   expect_error(calculate_boot_stats(c(1, 2, 3), 100, level="Over 9000"))
+  expect_error(calculate_boot_stats(c(1, 2, 3), 100, level=c(0.025, 0.975)))
 })
 
 test_that('check estimator error throwing properly', {
@@ -75,4 +76,10 @@ test_that('check estimator error throwing properly', {
 test_that('check that pass_dist error throws properly', {
   expect_error(calculate_boot_stats(c(1, 2, 3), 100, pass_dist = "Yes"))
   expect_error(calculate_boot_stats(c(1, 2, 3), 100, pass_dist = 1))
+})
+
+# check warning
+
+test_that('check that warnings work', {
+  expect_warning(calculate_boot_stats(c(1, 2, 3), 100, level = 0.05))
 })
