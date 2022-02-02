@@ -69,7 +69,8 @@ plot_ci <- function(sample, rep, bin_size = 30, n = "auto", level = 0.95,
                                        ggplot2::aes_string(x = value)) +
     ggplot2::geom_histogram(fill = "dodgerblue3", color = "lightgrey", 
                             bins = bin_size) +
-    ggplot2::labs(x = paste("Bootstrap sample ", estimator), y = y_axis) +
+    ggplot2::labs(x = paste("Bootstrap sample ", estimator, sep = ''),
+                  y = y_axis) +
     ggplot2::theme(text = ggplot2::element_text(size = 16.5)) +
     ggplot2::geom_vline(xintercept = est_v, colour = "red", size = 1) + 
     ggplot2::geom_vline(xintercept = unname(sample_stat_dict$lower), 
@@ -102,7 +103,7 @@ plot_ci <- function(sample, rep, bin_size = 30, n = "auto", level = 0.95,
     ggplot2::ggtitle(title)
   
   if (!is.null(path)){
-    ggplot2::ggsave(filename = paste(path,"Bootsrap_histogram.png",sep=''), 
+    ggplot2::ggsave(filename = paste(path,"Bootsrap_histogram.png",sep = ''), 
                     plot = annotated_plot, path = path)
   }
   
