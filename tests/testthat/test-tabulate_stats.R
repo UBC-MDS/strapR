@@ -21,9 +21,6 @@ test_that("Check if error thrown for non-whole number precision input", {
   expect_error(tabulate_stats(calc_stats, precision = 10.90))
 })
 
-test_that("Check if error thrown for non-boolean save input", {
-  expect_error(tabulate_stats(calc_stats, save = "yes"))
-})
 
 test_that("Check if distribution is dropped if present in statistics list", {
   expect_equal(tabulate_stats(calc_stats), tabulate_stats(st_withdist))
@@ -48,5 +45,10 @@ test_that("Check if handeling when n ='auto' correctly" , {
 
 folder <- "no_folder/"
 test_that("Check if error thrown if save folder doesn't exist", {
+  expect_error(tabulate_stats(calc_stats, folder_path = folder))
+})
+
+folder <- 9
+test_that("Check if error thrown if folder isn't string", {
   expect_error(tabulate_stats(calc_stats, folder_path = folder))
 })
