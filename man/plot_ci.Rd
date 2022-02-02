@@ -40,6 +40,7 @@ equal size over the range}
 "var", "sd") estimators}
 
 \item{path}{A character vector for the path to directory from
+
 current directory to save plot}
 }
 \value{
@@ -54,6 +55,8 @@ Other stats and parameters of the distribution and sample are
 also returned.
 }
 \examples{
+
 plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, level = 0.95)
 plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, path = "../")
+
 }
