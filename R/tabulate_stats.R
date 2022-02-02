@@ -44,12 +44,9 @@ tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
 
   summary <- dplyr::as_tibble(stat_list)
 
-
-
   if(!is.character(folder_path)) {
     stop("path the folder should be a character vector")
   }
-
 
   if(precision%%1 != 0 | precision < 0) {
     stop("Precision paramter should be a positive integer")
@@ -59,7 +56,7 @@ tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
     stop("The save parameters should be TRUE or FALSE")
   }
 
-  if (is.null(summary$estimator)==TRUE){
+  if (!(c("estimator") %in% colnames(summary))){
     stop("stat_list needs to be list outputted from the
          calculate_boot_stats() function")
   }
@@ -81,7 +78,6 @@ tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
     stop("stat_list paramter needs to be  the list
          outputted from the calculate_boot_stats() function")
   }
-
 
   stat_summary <- summary |>
     dplyr::select({{ estimator }}, lower, upper, std_err) |>

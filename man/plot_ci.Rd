@@ -11,7 +11,7 @@ plot_ci(
   bin_size = 30,
   n = "auto",
   level = 0.95,
-  random_seed = NULL,
+  seed = NULL,
   title = "",
   y_axis = "Count",
   estimator = "mean",
@@ -30,7 +30,7 @@ equal size over the range}
 
 \item{level}{A numeric vector for the confidence level}
 
-\item{random_seed}{A integer vector as random seed.}
+\item{seed}{A integer vector as seed.}
 
 \item{title}{A character vector for the title of the histogram}
 
@@ -40,7 +40,6 @@ equal size over the range}
 "var", "sd") estimators}
 
 \item{path}{A character vector for the path to directory from
-
 current directory to save plot}
 }
 \value{
@@ -55,8 +54,6 @@ Other stats and parameters of the distribution and sample are
 also returned.
 }
 \examples{
-
 plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, level = 0.95)
 plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, path = "../")
-
 }
