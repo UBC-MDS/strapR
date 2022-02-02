@@ -20,7 +20,8 @@
 #'
 #' @examples
 #' calculate_boot_stats(c(1, 2, 3, 4), 1000, level = 0.95, seed = 1)
-#' calculate_boot_stats(c(1, 2, 3, 4), 1000, level = 0.95, estimator = "median", seed = 1, pass_dist = TRUE)
+#' calculate_boot_stats(c(1, 2, 3, 4), 1000, level = 0.95, estimator = "median",
+#' seed = 1, pass_dist = TRUE)
 
 calculate_boot_stats <- function(sample, rep, n = "auto", level = 0.95,
                             estimator = "mean", seed = NULL,
@@ -54,7 +55,13 @@ calculate_boot_stats <- function(sample, rep, n = "auto", level = 0.95,
     warning("Warning: chosen level is quite low--level is a confidence level,
             not a signficance level")
   }
-  
+
+  # Declaring variables to avoid notes in check()
+  median <- median
+  sd <- sd
+  quantile <- quantile
+  var <- var
+    
   estimator_list <- list(
     "mean" = mean,
     "median" = median,

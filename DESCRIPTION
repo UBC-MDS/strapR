@@ -28,4 +28,5 @@ Imports:
     dplyr,
     knitr,
     kableExtra,
-    ggplot2
+    ggplot2,
+    tidyselect
