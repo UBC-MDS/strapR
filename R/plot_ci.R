@@ -102,7 +102,7 @@ plot_ci <- function(sample, rep, bin_size = 30, n = "auto", level = 0.95,
     ggplot2::ggtitle(title)
   
   if (!is.null(path)){
-    ggplot2::ggsave(filename = paste(path,"Bootsrap_histogram.png"), 
+    ggplot2::ggsave(filename = paste(path,"Bootsrap_histogram.png",sep=''), 
                     plot = annotated_plot, path = path)
   }
   
