@@ -89,13 +89,7 @@ calculate_boot_stats <- function(sample, rep, n = "auto", level = 0.95,
   )
 
   # rename the sample estimator dynamically
-    # make sure the order of the list is correct before renaming
-    if (!(names(stats_list)[3] == "sample_estimate")) {
-      stop("third index of stats list must be the sample estimate")
-    }
-
-    # rename
-    names(stats_list)[[3]] <- paste0("sample_", estimator)
+  names(stats_list)[[3]] <- paste0("sample_", estimator)
 
 
   if (pass_dist == TRUE) {
