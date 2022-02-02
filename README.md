@@ -6,6 +6,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/UBC-MDS/strapR/workflows/R-CMD-check/badge.svg)](https://github.com/UBC-MDS/strapR/actions)
+[![codecov](https://codecov.io/gh/UBC-MDS/strapvizr/branch/master/graph/badge.svg?token=xcNw6kZVgS)](https://codecov.io/gh/UBC-MDS/strapvizr)
 <!-- badges: end -->
 
 ## Summary
