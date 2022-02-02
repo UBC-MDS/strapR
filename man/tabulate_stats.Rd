@@ -5,7 +5,7 @@
 \title{Makes two presentation-ready tables that summarize the statistics from the bootstrapped
 samples and the parameters for creating the bootstrapped samples.}
 \usage{
-tabulate_stats(stat_list, precision = 2, save = FALSE, folder_path = "")
+tabulate_stats(stat_list, precision = 2, path = NULL)
 }
 \arguments{
 \item{stat_list}{A named list of the summary statistics produced
@@ -14,9 +14,7 @@ by the \code{calculate_boot_stats} function}
 \item{precision}{A integer value for the precision of the
 table values}
 
-\item{save}{A logical indicating if tables should  be saved as a png to disk}
-
-\item{folder_path}{A character vector with the path to where the tables are
+\item{path}{A character vector with the path to where the tables are
 to be saved to}
 }
 \value{
@@ -30,7 +28,7 @@ Other stats and parameters of the distribution and sample are
 also returned.
 }
 \examples{
-st <- calculate_boot_stats(c(1, 2, 3, 4), 1000, level = 0.95, seed=123)
+st <- calculate_boot_stats(c(1, 2, 3, 4), 1000, level = 0.95, seed = 123)
 result  <-  tabulate_stats(st)
 result[[1]] # stats table
 result[[2]] # parameter table
