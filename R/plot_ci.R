@@ -12,70 +12,72 @@
 #' @param bin_size A integer vector for number of bins representing intervals of
 #'                 equal size over the range
 #' @param n A integer or character vector for the size of bootstrap samples
-#' @param ci_level A numeric vector for the confidence level
-#' @param ci_random_seed A integer vector as random seed. 
+#' @param level A numeric vector for the confidence level
+#' @param seed A integer vector as seed. 
 #' @param title A character vector for the title of the histogram
-#' @param x_axis A character vector for the name of the x axis
 #' @param y_axis A character vector for the name of the y axis
-#' @param save_result_to A character vector for the path to directory from 
-#'                       current directory to save plot
+#' @param estimator A character vector containing one of the("mean", "median", 
+#'                  "var", "sd") estimators
+#' @param path A character vector for the path to directory from 
+#'             current directory to save plot
 #'
 #' @return ggplot object
 #' @export
 #'
 #' @examples
-#' plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, ci_level = 0.95)
-#' plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, save_result_to = "../")
+#' plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, level = 0.95)
+#' plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, path = "../")
 
-# library(ggplot2, quietly = TRUE)
-
-plot_ci <- function(sample, rep, bin_size = 30, n = "auto", ci_level = 0.95, 
-                    ci_random_seed = NULL, title = "Bootstrap Sampling Plot", 
-                    x_axis = "Bootstrap Sample Mean", y_axis = "Count", 
-                    save_result_to = ".") {
+plot_ci <- function(sample, rep, bin_size = 30, n = "auto", level = 0.95, 
+                    seed = NULL, title = "", y_axis = "Count", 
+                    estimator = "mean", path = NULL) {
   
   if(!is.character(title)) {
     stop("title should be a character vector")
-  }
-  
-  if(!is.character(x_axis)) {
-    stop("x_axis should be a character vector")
   }
   
   if(!is.character(y_axis)) {
     stop("y_axis should be a character vector")
   }
   
-  if(!is.character(save_result_to)) {
+  if (!is.null(path)){
+    if(!is.character(path)) {
     stop("save_result_to should be a character vector")
+    }
   }
   
-  # Declaring variables to avoid notes in check()
-  sample_m <- ggplot2::aes(sample_m)
-    
-  sample_stat_dict <- calculate_boot_stats(sample, rep, level = ci_level, 
-                                          seed = ci_random_seed, 
-                                          pass_dist = TRUE)
+  if (!is.null(path)){
+    if(dir.exists(path) == FALSE){
+      stop("The path you want to save your tables to doesn't exist")
+    }
+  }
+  
+  sample_stat_dict <- calculate_boot_stats(sample, rep, level = level, 
+                                           seed = seed, 
+                                           estimator = estimator, 
+                                           pass_dist = TRUE)
   
   bootstrap_dist <- data.frame(matrix(unlist(sample_stat_dict$dist), 
                                       nrow = length(sample_stat_dict$dist), 
                                       byrow = TRUE))
   
-  colnames(bootstrap_dist) <- c("sample_m")
+  est_v <- sample_stat_dict[[paste("sample_", estimator, sep = '')]]
   
-  bootstrap_dist_ci <- ggplot2::ggplot(bootstrap_dist, sample_m) +
+  value <- names(bootstrap_dist)[1]
+
+  bootstrap_dist_ci <- ggplot2::ggplot(bootstrap_dist, 
+                                       ggplot2::aes_string(x = value)) +
     ggplot2::geom_histogram(fill = "dodgerblue3", color = "lightgrey", 
                             bins = bin_size) +
-    ggplot2::labs(x = x_axis, y = y_axis) +
+    ggplot2::labs(x = paste("Bootstrap sample ", estimator), y = y_axis) +
     ggplot2::theme(text = ggplot2::element_text(size = 16.5)) +
-    ggplot2::geom_vline(xintercept = sample_stat_dict$sample_mean, 
-                        colour = "red", size = 1) + 
+    ggplot2::geom_vline(xintercept = est_v, colour = "red", size = 1) + 
     ggplot2::geom_vline(xintercept = unname(sample_stat_dict$lower), 
                         colour = "purple", size = 1, linetype = "dashed") +  
     ggplot2::geom_vline(xintercept = unname(sample_stat_dict$upper), 
                         colour = "purple", size = 1, linetype = "dashed")
-  
-  str_1 <- toString(round(sample_stat_dict$sample_mean, 2))
+
+  str_1 <- toString(round(est_v, 2))
   
   str_2 <- toString(round(sample_stat_dict$std_err, 2))
   
@@ -88,20 +90,22 @@ plot_ci <- function(sample, rep, bin_size = 30, n = "auto", ci_level = 0.95,
   upper_label <- toString(round(unname(sample_stat_dict$upper), 2))
   
   annotated_plot <- bootstrap_dist_ci +
-    ggplot2::annotate(geom="label", x = sample_stat_dict$sample_mean, 
-                      y = 0.9 * y_max, label = paste(str_1, "+/-", str_2), 
-                      size = 3, color = "red", fill = " lightgrey") + 
-    ggplot2::annotate(geom="label",  x = unname(sample_stat_dict$lower), 
+    ggplot2::annotate(geom ="label", x = est_v, y = 0.9 * y_max, 
+                      label = paste(str_1, "+/-", str_2), size = 3, 
+                      color = "red", fill = " lightgrey") + 
+    ggplot2::annotate(geom ="label",  x = unname(sample_stat_dict$lower), 
                       y = 0.9 * y_max, label = lower_label, size = 3, 
                       color = "purple", fill = " lightgrey") +
-    ggplot2::annotate(geom="label", x = unname(sample_stat_dict$upper), 
+    ggplot2::annotate(geom ="label", x = unname(sample_stat_dict$upper), 
                       y = 0.9 * y_max, label = upper_label, size = 3, 
                       color = "purple", fill = " lightgrey") +
     ggplot2::ggtitle(title)
   
-  ggplot2::ggsave(filename = paste(title, ".png"), plot = annotated_plot,
-                  path = save_result_to)
-
+  if (!is.null(path)){
+    ggplot2::ggsave(filename = paste(path,"Bootsrap_histogram.png",sep=''), 
+                    plot = annotated_plot, path = path)
+  }
+  
   annotated_plot
 }
 

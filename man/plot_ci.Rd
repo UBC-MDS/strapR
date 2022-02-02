@@ -10,12 +10,12 @@ plot_ci(
   rep,
   bin_size = 30,
   n = "auto",
-  ci_level = 0.95,
-  ci_random_seed = NULL,
-  title = "Bootstrap Sampling Plot",
-  x_axis = "Bootstrap Sample Mean",
+  level = 0.95,
+  random_seed = NULL,
+  title = "",
   y_axis = "Count",
-  save_result_to = "."
+  estimator = "mean",
+  path = NULL
 )
 }
 \arguments{
@@ -28,17 +28,19 @@ equal size over the range}
 
 \item{n}{A integer or character vector for the size of bootstrap samples}
 
-\item{ci_level}{A numeric vector for the confidence level}
+\item{level}{A numeric vector for the confidence level}
 
-\item{ci_random_seed}{A integer vector as random seed.}
+\item{random_seed}{A integer vector as random seed.}
 
 \item{title}{A character vector for the title of the histogram}
 
-\item{x_axis}{A character vector for the name of the x axis}
-
 \item{y_axis}{A character vector for the name of the y axis}
 
-\item{save_result_to}{A character vector for the path to directory from
+\item{estimator}{A character vector containing one of the("mean", "median",
+"var", "sd") estimators}
+
+\item{path}{A character vector for the path to directory from
+
 current directory to save plot}
 }
 \value{
@@ -53,6 +55,8 @@ Other stats and parameters of the distribution and sample are
 also returned.
 }
 \examples{
-plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, ci_level = 0.95)
-plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, save_result_to = "../")
+
+plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, level = 0.95)
+plot_ci(c(1, 2, 3, 4, 5, 6, 7), 1000, n = 100, path = "../")
+
 }
