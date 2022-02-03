@@ -68,7 +68,7 @@ tabulate_stats <- function(stat_list, precision = 2, path = NULL) {
            "rep","estimator", estimator))
 
 
-  if(all(name_check =! TRUE)){
+  if(any(name_check == FALSE)){
     stop("stat_list paramter needs to be  the list
          outputted from the calculate_boot_stats() function")
   }
