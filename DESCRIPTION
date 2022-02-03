@@ -31,6 +31,9 @@ Imports:
     knitr,
     kableExtra,
     ggplot2,
+    readr，
     tidyselect
 VignetteBuilder: knitr
 URL: https://ubc-mds.github.io/strapvizr/
+
+

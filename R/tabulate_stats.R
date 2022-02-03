@@ -68,7 +68,7 @@ tabulate_stats <- function(stat_list, precision = 2, path = NULL) {
            "rep","estimator", estimator))
 
 
-  if(all(name_check =! TRUE)){
+  if(any(name_check == FALSE)){
     stop("stat_list paramter needs to be  the list
          outputted from the calculate_boot_stats() function")
   }
@@ -100,14 +100,6 @@ tabulate_stats <- function(stat_list, precision = 2, path = NULL) {
     ss <- summary$n
   }
 
-  if (!is.null(path)){
-    caption <- paste0("Bootstrapping sample statistics from sample with ",
-                    ss," records")
-    stat_summary |>
-      knitr::kable(output = FALSE, caption = caption) |>
-      kableExtra::kable_styling() |>
-      kableExtra::as_image(file = paste0(path, "Sampling_Statistics.png"))
-  }
 
   if (summary$n !=  "auto"){
     bootstrap_summary <-  summary |>
@@ -131,7 +123,14 @@ tabulate_stats <- function(stat_list, precision = 2, path = NULL) {
     bootstrap_summary |>
       knitr::kable(output = FALSE, caption = caption) |>
       kableExtra::kable_styling() |>
-      kableExtra::as_image(file = paste0(path, "Bootsrapping_table.png"))
+      readr::write_lines(file = paste0(path, "Bootstrapping_Table.tex"))
+
+    caption <- paste0("Bootstrapping sample statistics from sample with ",
+                      ss," records")
+    stat_summary |>
+      knitr::kable(output = FALSE, caption = caption) |>
+      kableExtra::kable_styling() |>
+      readr::write_lines(file = paste0(path, "Sampling_Statistics.tex"))
   }
 
   return(list(stat_summary, bootstrap_summary))

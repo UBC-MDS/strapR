@@ -4,8 +4,10 @@
 ^README\.Rmd$
 ^CODE_OF_CONDUCT\.md$
 ^\.github$
-^Bootstrap_histogram\.png$
+^Bootstrap_Histogram\.png$
 ^CONTRIBUTING\.md$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^Bootstrapping_Table\.tex$
+^Sampling_Statistics\.tex$
