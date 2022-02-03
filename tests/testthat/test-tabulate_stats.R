@@ -71,3 +71,36 @@ folder <- 9
 test_that("Check if error thrown if folder isn't string", {
   expect_error(tabulate_stats(calc_stats, folder_path = folder))
 })
+
+final_tables <- tabulate_stats(calc_stats_var)
+test_that("Check for variance columns in statistic table", {
+  expect_equal(colnames(final_tables[[1]]), c("Sample Variance",
+                                              "Lower Bound CI",
+                                              "Upper Bound CI",
+                                              "Standard Error"))
+})
+
+final_tables <- tabulate_stats(calc_stats_median)
+test_that("Check for variance columns in statistic table", {
+  expect_equal(colnames(final_tables[[1]]), c("Sample Median",
+                                              "Lower Bound CI",
+                                              "Upper Bound CI",
+                                              "Standard Error"))
+})
+
+
+final_tables <- tabulate_stats(calc_stats_sd)
+test_that("Check for variance columns in statistic table", {
+  expect_equal(colnames(final_tables[[1]]), c("Sample Standard Deviation",
+                                              "Lower Bound CI",
+                                              "Upper Bound CI",
+                                              "Standard Error"))
+})
+
+test_that("Check that outputs are in a list", {
+  expect_equal(is(final_tables,"list"), TRUE)
+})
+
+
+
+
