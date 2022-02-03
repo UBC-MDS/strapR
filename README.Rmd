@@ -65,6 +65,16 @@ This is a basic example which shows you how to solve a common problem:
 
 -   `tabulate_stats`: Generates a table that contains a given sampling distribution's mean and standard deviation along with relevant statistics as well as a summary table of the bootstrap distributions parameters. The code automatically saves the tables as html documents.
 
+## Documentation
+
+The help file can be viewed by:
+
+```r
+?chemcalculatorrr::compute_mass
+?chemcalculatorrr::moles_grams_converter
+?chemcalculatorrr::percent_mass
+```
+
 ## Contributing
 
 Julien Gordon, Gautham Pughazhendhi, Zack Tang, and Margot Vore.
