@@ -85,6 +85,16 @@ This is a basic example which shows you how to solve a common problem:
     parameters. The code automatically saves the tables as html
     documents.
 
+## Documentation
+
+The help file can be viewed by:
+
+```r
+?chemcalculatorrr::compute_mass
+?chemcalculatorrr::moles_grams_converter
+?chemcalculatorrr::percent_mass
+```
+
 ## Contributing
 
 Julien Gordon, Gautham Pughazhendhi, Zack Tang, and Margot Vore.
