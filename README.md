@@ -90,9 +90,10 @@ This is a basic example which shows you how to solve a common problem:
 The help file can be viewed by:
 
 ```r
-?chemcalculatorrr::compute_mass
-?chemcalculatorrr::moles_grams_converter
-?chemcalculatorrr::percent_mass
+?strapvizr::bootstrap
+?strapvizr::calculate_boot_stats
+?strapvizr::plot_ci
+?strapvizr::tabulate_stats
 ```
 
 ## Contributing
