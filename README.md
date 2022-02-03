@@ -85,6 +85,17 @@ This is a basic example which shows you how to solve a common problem:
     parameters. The code automatically saves the tables as html
     documents.
 
+## Documentation
+
+The help file can be viewed by:
+
+```r
+?strapvizr::bootstrap
+?strapvizr::calculate_boot_stats
+?strapvizr::plot_ci
+?strapvizr::tabulate_stats
+```
+
 ## Contributing
 
 Julien Gordon, Gautham Pughazhendhi, Zack Tang, and Margot Vore.
