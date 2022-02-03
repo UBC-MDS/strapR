@@ -100,14 +100,6 @@ tabulate_stats <- function(stat_list, precision = 2, path = NULL) {
     ss <- summary$n
   }
 
-  if (!is.null(path)){
-    caption <- paste0("Bootstrapping sample statistics from sample with ",
-                    ss," records")
-    stat_summary |>
-      knitr::kable(output = FALSE, caption = caption) |>
-      kableExtra::kable_styling() |>
-      kableExtra::as_image(file = paste0(path, "Sampling_Statistics.png"))
-  }
 
   if (summary$n !=  "auto"){
     bootstrap_summary <-  summary |>
@@ -132,6 +124,13 @@ tabulate_stats <- function(stat_list, precision = 2, path = NULL) {
       knitr::kable(output = FALSE, caption = caption) |>
       kableExtra::kable_styling() |>
       kableExtra::as_image(file = paste0(path, "Bootsrapping_table.png"))
+
+    caption <- paste0("Bootstrapping sample statistics from sample with ",
+                      ss," records")
+    stat_summary |>
+      knitr::kable(output = FALSE, caption = caption) |>
+      kableExtra::kable_styling() |>
+      kableExtra::as_image(file = paste0(path, "Sampling_Statistics.png"))
   }
 
   return(list(stat_summary, bootstrap_summary))
