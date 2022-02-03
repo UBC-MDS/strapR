@@ -123,14 +123,14 @@ tabulate_stats <- function(stat_list, precision = 2, path = NULL) {
     bootstrap_summary |>
       knitr::kable(output = FALSE, caption = caption) |>
       kableExtra::kable_styling() |>
-      kableExtra::as_image(file = paste0(path, "Bootsrapping_table.png"))
+      readr::write_lines(file = paste0(path, "Bootstrapping_Table.tex"))
 
     caption <- paste0("Bootstrapping sample statistics from sample with ",
                       ss," records")
     stat_summary |>
       knitr::kable(output = FALSE, caption = caption) |>
       kableExtra::kable_styling() |>
-      kableExtra::as_image(file = paste0(path, "Sampling_Statistics.png"))
+      readr::write_lines(file = paste0(path, "Sampling_Statistics.tex"))
   }
 
   return(list(stat_summary, bootstrap_summary))

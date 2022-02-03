@@ -103,8 +103,8 @@ test_that("Check that outputs are in a list", {
 })
 
 input_path <- "./"
-file1 <- "./Bootsrapping_table.png"
-file2 <- "./Sampling_Statistics.png"
+file1 <- "./Bootstrapping_Table.tex"
+file2 <- "./Sampling_Statistics.tex"
 tabulate_stats(calc_stats, path = input_path)
 test_that("Check that the files are saved", {
   expect_equal(file.exists(file1), TRUE)
