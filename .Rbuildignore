@@ -6,4 +6,6 @@
 ^\.github$
 ^Bootstrap_histogram\.png$
 ^CONTRIBUTING\.md$
-
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
