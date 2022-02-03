@@ -111,6 +111,19 @@ test_that("Check that the files are saved", {
   expect_equal(file.exists(file2), TRUE)
 })
 
+stats_list <- list(
+  "lower" = 17,
+  "upper" = 20,
+  "sample_estimate" = 18,
+  "std_err" = 0.24,
+  "sample_size" = 10,
+  "n" = 10,
+  "rep" = 10,
+  "estimator" = "mean"
+)
 
+test_that("Check if error occurs when not all values are in list", {
+  expect_error(tabulate_stats(stat_list))
+})
 
 
