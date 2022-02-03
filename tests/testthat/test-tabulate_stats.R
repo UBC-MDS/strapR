@@ -1,5 +1,27 @@
-calc_stats = calculate_boot_stats(c(1:15), 1000, level = 0.95, seed = 1)
-st_withdist = calculate_boot_stats(c(1:15), 1000, level = 0.95,
+calc_stats <- calculate_boot_stats(c(1:15),
+                                   1000,
+                                   level = 0.95,
+                                   seed = 1)
+
+calc_stats_sd <- calculate_boot_stats(c(1:15),
+                                     1000,
+                                     level = 0.95,
+                                     seed = 1,
+                                     estimator = "sd")
+
+calc_stats_var <- calculate_boot_stats(c(1:15),
+                                     1000,
+                                     level = 0.95,
+                                     seed = 1,
+                                     estimator = "var")
+
+calc_stats_median <- calculate_boot_stats(c(1:15),
+                                      1000,
+                                      level = 0.95,
+                                      seed = 1,
+                                      estimator = "median")
+
+st_withdist <- calculate_boot_stats(c(1:15), 1000, level = 0.95,
                                    seed = 1, pass_dist = TRUE)
 
 test_that("Check if error thrown for invalid statistic input", {
@@ -21,10 +43,6 @@ test_that("Check if error thrown for non-whole number precision input", {
   expect_error(tabulate_stats(calc_stats, precision = 10.90))
 })
 
-test_that("Check if error thrown for non-boolean save input", {
-  expect_error(tabulate_stats(calc_stats, save = "yes"))
-})
-
 test_that("Check if distribution is dropped if present in statistics list", {
   expect_equal(tabulate_stats(calc_stats), tabulate_stats(st_withdist))
 })
@@ -35,6 +53,9 @@ params <- final_tables[[2]]
 
 test_that("Check if handeling when n ='auto' correctly" , {
   expect_equal(params[[1, "Sample Size"]], calc_stats$sample_size)
+  expect_equal(params[[1, "Sample Size"]], calc_stats_sd$sample_size)
+  expect_equal(params[[1, "Sample Size"]], calc_stats_var$sample_size)
+  expect_equal(params[[1, "Sample Size"]], calc_stats_median$sample_size)
 })
 
 st_change_n <- calculate_boot_stats(c(1:15), 1000, level = 0.95,
@@ -47,6 +68,62 @@ test_that("Check if handeling when n ='auto' correctly" , {
 })
 
 folder <- "no_folder/"
-test_that("Check if error thrown if save folder doesn't exist", {
-  expect_error(tabulate_stats(calc_stats, folder_path = folder))
+test_that("Check if error thrown if save folder misspecified", {
+  expect_error(tabulate_stats(calc_stats, path = folder))
+  expect_error(tabulate_stats(calc_stats, path = 123))
 })
+
+final_tables <- tabulate_stats(calc_stats_var)
+test_that("Check for variance columns in statistic table", {
+  expect_equal(colnames(final_tables[[1]]), c("Sample Variance",
+                                              "Lower Bound CI",
+                                              "Upper Bound CI",
+                                              "Standard Error"))
+})
+
+final_tables <- tabulate_stats(calc_stats_median)
+test_that("Check for variance columns in statistic table", {
+  expect_equal(colnames(final_tables[[1]]), c("Sample Median",
+                                              "Lower Bound CI",
+                                              "Upper Bound CI",
+                                              "Standard Error"))
+})
+
+
+final_tables <- tabulate_stats(calc_stats_sd)
+test_that("Check for variance columns in statistic table", {
+  expect_equal(colnames(final_tables[[1]]), c("Sample Standard Deviation",
+                                              "Lower Bound CI",
+                                              "Upper Bound CI",
+                                              "Standard Error"))
+})
+
+test_that("Check that outputs are in a list", {
+  expect_equal(is(final_tables,"list"), TRUE)
+})
+
+input_path <- "./"
+file1 <- "./Bootstrapping_Table.tex"
+file2 <- "./Sampling_Statistics.tex"
+tabulate_stats(calc_stats, path = input_path)
+test_that("Check that the files are saved", {
+  expect_equal(file.exists(file1), TRUE)
+  expect_equal(file.exists(file2), TRUE)
+})
+
+stat_list <- list(
+  "lower" = 17,
+  "upper" = 20,
+  "sample_estimate" = 18,
+  "std_err" = 0.24,
+  "sample_size" = 10,
+  "n" = 10,
+  "rep" = 10,
+  "estimator" = "mean"
+)
+
+test_that("Check if error occurs when not all values are in list", {
+  expect_error(tabulate_stats(stat_list))
+})
+
+

@@ -10,9 +10,7 @@
 #'             by the `calculate_boot_stats` function
 #' @param precision A integer value for the precision of the
 #'                  table values
-#' @param save  A logical indicating if tables should  be saved as a png to disk
-#'
-#' @param folder_path A character vector with the path to where the tables are
+#' @param path A character vector with the path to where the tables are
 #'                     to be saved to
 #'
 #' @return a list containing 2 tibble objects:  table 1- summary statistics
@@ -20,12 +18,11 @@
 #' @export
 #'
 #' @examples
-#' st <- calculate_boot_stats(c(1, 2, 3, 4), 1000, level = 0.95, seed=123)
+#' st <- calculate_boot_stats(c(1, 2, 3, 4), 1000, level = 0.95, seed = 123)
 #' result  <-  tabulate_stats(st)
 #' result[[1]] # stats table
 #' result[[2]] # parameter table
-tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
-                           folder_path = "") {
+tabulate_stats <- function(stat_list, precision = 2, path = NULL) {
 
   # Declaring variables and functions to address check() notes
   dist <- NULL
@@ -44,7 +41,7 @@ tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
 
   summary <- dplyr::as_tibble(stat_list)
 
-  if(!is.character(folder_path)) {
+  if(!is.character(path) & !is.null(path)) {
     stop("path the folder should be a character vector")
   }
 
@@ -52,17 +49,14 @@ tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
     stop("Precision paramter should be a positive integer")
   }
 
-  if(!is.logical(save)) {
-    stop("The save parameters should be TRUE or FALSE")
-  }
 
   if (!(c("estimator") %in% colnames(summary))){
     stop("stat_list needs to be list outputted from the
          calculate_boot_stats() function")
   }
 
-  if (folder_path != ""){
-    if(dir.exists(folder_path)==FALSE){
+  if (!is.null(path)){
+    if(dir.exists(path) == FALSE){
       stop("The path you want to save your tables to doesn't exist")
     }
   }
@@ -74,7 +68,7 @@ tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
            "rep","estimator", estimator))
 
 
-  if(all(name_check=!TRUE)){
+  if(any(name_check == FALSE)){
     stop("stat_list paramter needs to be  the list
          outputted from the calculate_boot_stats() function")
   }
@@ -106,14 +100,6 @@ tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
     ss <- summary$n
   }
 
-  if (save == TRUE | folder_path != ""){
-    caption <- paste0("Bootstrapping sample statistics from sample with ",
-                    ss," records")
-    stat_summary |>
-      knitr::kable(output = FALSE, caption = caption) |>
-      kableExtra::kable_styling() |>
-      kableExtra::as_image(file = paste0(folder_path, "Sampling_Statistics.png"))
-  }
 
   if (summary$n !=  "auto"){
     bootstrap_summary <-  summary |>
@@ -132,12 +118,19 @@ tabulate_stats <- function(stat_list, precision = 2, save = FALSE,
              "Significance Level" = level)
   }
 
-  if (save == TRUE | folder_path != ""){
+  if (!is.null(path)){
     caption <- paste0("Bootstrapping Parameters ")
     bootstrap_summary |>
       knitr::kable(output = FALSE, caption = caption) |>
       kableExtra::kable_styling() |>
-      kableExtra::as_image(file = paste0(folder_path, "Bootsrapping_table.png"))
+      readr::write_lines(file = paste0(path, "Bootstrapping_Table.tex"))
+
+    caption <- paste0("Bootstrapping sample statistics from sample with ",
+                      ss," records")
+    stat_summary |>
+      knitr::kable(output = FALSE, caption = caption) |>
+      kableExtra::kable_styling() |>
+      readr::write_lines(file = paste0(path, "Sampling_Statistics.tex"))
   }
 
   return(list(stat_summary, bootstrap_summary))

@@ -30,4 +30,5 @@ Imports:
     knitr,
     kableExtra,
     ggplot2,
-    tidyselect
+    tidyselect,
+    readr

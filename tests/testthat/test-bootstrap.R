@@ -7,14 +7,22 @@ test_that("Check if error thrown for invalid sample input", {
 
 test_that("Check if error thrown for invalid rep input", {
   expect_error(bootstrap(c(1, 2, 3), "a", 3))
+  expect_error(bootstrap(c(1, 2, 3), 0, 3))
 })
 
 test_that("Check if error thrown for invalid n input", {
   expect_error(bootstrap(c(1, 2, 3), 3, "catch me"))
+  expect_error(bootstrap(c(1, 2, 3), 3, TRUE))
+  expect_error(bootstrap(c(1, 2, 3), 3, 0))
 })
 
 test_that("Check if error thrown for invalid seed input", {
   expect_error(bootstrap(c(1, 2, 3), 3, 3, seed = -1))
+  expect_error(bootstrap(c(1, 2, 3), 3, 3, seed = "two"))
+})
+
+test_that("Check if error thrown for invalid estimator input", {
+  expect_error(bootstrap(c(1, 2, 3), 3, estimator = "mean"))
 })
 
 test_that("Check if bootstrap distribution is correct", {
