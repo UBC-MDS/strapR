@@ -12,8 +12,8 @@ test_that("Check if error thrown for invalid rep input", {
 
 test_that("Check if error thrown for invalid n input", {
   expect_error(bootstrap(c(1, 2, 3), 3, "catch me"))
-  expect_error(bootstrap(c(1, 2, 3), TRUE))
-  expect_error(bootstrap(c(1, 2, 3), 0))
+  expect_error(bootstrap(c(1, 2, 3), 3, TRUE))
+  expect_error(bootstrap(c(1, 2, 3), 3, 0))
 })
 
 test_that("Check if error thrown for invalid seed input", {
