@@ -37,7 +37,7 @@ There are two functions in the bootstrap module, `bootstrap`and `calculate_boot_
 ### 1.1 `bootstrap_distribution`
 **Functionality**
 
-This function performs the bootstrap and returns an array of the results.
+This function performs the bootstrap and returns a list of the results.
 
 **Function inputs**
 
