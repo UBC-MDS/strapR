@@ -164,7 +164,7 @@ This function creates two tables that summarize the sampling distribution and th
   - default is NULL which means the tables will not be saved
 
 ```{r}
-stat <- calculate_boot_stats(ex_data, 1000, level=0.95, seed=123)
+stat <- calculate_boot_stats(ex_data, 1000, level = 0.95, seed = 123)
 result  <-  strapvizr::tabulate_stats(stat, precision = 2)
 stats_table <- result[[1]] # stats table
 parameters_table <- result[[2]] # parameter table
