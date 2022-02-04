@@ -75,7 +75,7 @@ This function performs bootstrapping and returns a named list of the sampling di
 
 - sample : the data that will be bootstrapped
 - rep : the number of repetitions of bootstrapping
-  - this controls the size of the output array
+  - this controls the size of the outputted list
 - n : number of samples in each bootstrap
   - default is auto which means the distribution will be the same size as the original sample
 - level : the significance level of interest for the sampling distribution
