@@ -69,7 +69,7 @@ class(boot_2)
 ### 1.2 `calculate_boot_stats`
 **Functionality**
 
-This function performs bootstrapping and returns a dictionary of the sampling distribution statistics.
+This function performs bootstrapping and returns a named list of the sampling distribution statistics.
 
 **Function inputs**
 
