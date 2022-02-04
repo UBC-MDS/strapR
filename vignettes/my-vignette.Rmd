@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-`strapvizr` is a package for performing bootstrapping of a sample to produce plots and statistics for use in final reports and documents. This notebook shows how you can utilize the strapvizpy package within a project.
+`strapvizr` is a package for performing bootstrapping of a sample to produce plots and statistics for use in final reports and documents. This notebook shows how you can utilize the strapvizr package within a project.
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -37,13 +37,13 @@ There are two functions in the bootstrap module, `bootstrap`and `calculate_boot_
 ### 1.1 `bootstrap_distribution`
 **Functionality**
 
-This function performs the bootstrap and returns an array of the results.
+This function performs the bootstrap and returns a list of the results.
 
 **Function inputs**
 
 - sample: the data that will be bootstrapped
 - rep: the number of repetitions of bootstrapping
-  - this controls the size of the output array
+  - this controls the size of the outputted list
 - n: number of samples in each bootstrap
   - default is `auto` which means the distribution will be the same size as the original sample
 - estimator: what sample statistic we are calculating with the bootstrap
@@ -69,13 +69,13 @@ class(boot_2)
 ### 1.2 `calculate_boot_stats`
 **Functionality**
 
-This function performs bootstrapping and returns a dictionary of the sampling distribution statistics.
+This function performs bootstrapping and returns a named list of the sampling distribution statistics.
 
 **Function inputs**
 
 - sample : the data that will be bootstrapped
 - rep : the number of repetitions of bootstrapping
-  - this controls the size of the output array
+  - this controls the size of the outputted list
 - n : number of samples in each bootstrap
   - default is auto which means the distribution will be the same size as the original sample
 - level : the significance level of interest for the sampling distribution
@@ -133,7 +133,7 @@ This function creates a histogram of a sampling distribution with its confidence
 
 ```{r fig.width=7, fig.height=4}
 # Plot sampling distibution of 1000 sample means at a 95% confidence interval
-plot_1 <- strapvizr::plot_ci(ex_data, rep=1000, level=0.95, seed=123)
+plot_1 <- strapvizr::plot_ci(ex_data, rep = 1000, level = 0.95, seed = 123)
 plot_1
 ```
 
@@ -141,8 +141,8 @@ plot_1
 # Plot sampling distibution of 1000 sample means at a 99% confidence interval
 # with a unique title and a bin size of 50
 title <- "Bootstrapped miles/(US) gallon"
-plot_2 <- strapvizr::plot_ci(ex_data, rep=1000, bin_size=50, level=0.99, title=title,
-                   seed=123, estimator = "var")
+plot_2 <- strapvizr::plot_ci(ex_data, rep = 1000, bin_size = 50, level = 0.99, title = title,
+                   seed = 123, estimator = "var")
 plot_2
 ```
 
@@ -164,7 +164,7 @@ This function creates two tables that summarize the sampling distribution and th
   - default is NULL which means the tables will not be saved
 
 ```{r}
-stat <- calculate_boot_stats(ex_data, 1000, level=0.95, seed=123)
+stat <- calculate_boot_stats(ex_data, 1000, level = 0.95, seed = 123)
 result  <-  strapvizr::tabulate_stats(stat, precision = 2)
 stats_table <- result[[1]] # stats table
 parameters_table <- result[[2]] # parameter table
