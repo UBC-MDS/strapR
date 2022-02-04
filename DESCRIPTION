@@ -22,6 +22,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Suggests: 
     covr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
@@ -32,3 +33,5 @@ Imports:
     ggplot2,
     tidyselect,
     readr
+VignetteBuilder: knitr
+URL: https://ubc-mds.github.io/strapvizr/
