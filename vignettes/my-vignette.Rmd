@@ -37,7 +37,7 @@ There are two functions in the bootstrap module, `bootstrap`and `calculate_boot_
 ### 1.1 `bootstrap_distribution`
 **Functionality**
 
-This function performs the bootstrap and returns a list of the results.
+This function performs the bootstrap and returns a numeric vector as the result.
 
 **Function inputs**
 
@@ -88,15 +88,17 @@ This function performs bootstrapping and returns a named list of the sampling di
 ```{r}
 # Get 100 sample means via bootstrapping and calculate statistics at the 
 #95% confidence interval
-stat_list_1 <- strapvizr::calculate_boot_stats(ex_data, 100, level = 0.95, seed = 123)
+stat_list_1 <- strapvizr::calculate_boot_stats(ex_data, 100, level = 0.95, 
+                                               seed = 123)
 stat_list_1
 ```
 
 ```{r}
 # Get 50 sample variances via bootstrapping at a 90% confidence level
 # and return the bootstrap distribution along with the statistics
-stat_list_2 <- strapvizr::calculate_boot_stats(ex_data, 50, level = 0.90, seed = 123, 
-                                estimator = "var", pass_dist = TRUE)
+stat_list_2 <- strapvizr::calculate_boot_stats(ex_data, 50, level = 0.90, 
+                                               seed = 123, estimator = "var",
+                                               pass_dist = TRUE)
 stat_list_2
 ```
 
@@ -141,8 +143,8 @@ plot_1
 # Plot sampling distibution of 1000 sample means at a 99% confidence interval
 # with a unique title and a bin size of 50
 title <- "Bootstrapped miles/(US) gallon"
-plot_2 <- strapvizr::plot_ci(ex_data, rep = 1000, bin_size = 50, level = 0.99, title = title,
-                   seed = 123, estimator = "var")
+plot_2 <- strapvizr::plot_ci(ex_data, rep = 1000, bin_size = 50, level = 0.99, 
+                             title = title, seed = 123, estimator = "var")
 plot_2
 ```
 
@@ -153,7 +155,7 @@ class(plot_2)
 
 **Functionality**
 
-This function creates two tables that summarize the sampling distribution and the parameters for creating the bootstrapped samples and saves them as latex files.
+This function creates a list of two tibble objects that summarize the sampling distribution and the parameters for creating the bootstrapped samples and saves them as latex files.
 
 **Function Inputs**
 
