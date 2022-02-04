@@ -141,8 +141,8 @@ plot_1
 # Plot sampling distibution of 1000 sample means at a 99% confidence interval
 # with a unique title and a bin size of 50
 title <- "Bootstrapped miles/(US) gallon"
-plot_2 <- strapvizr::plot_ci(ex_data, rep=1000, bin_size=50, level=0.99, title=title,
-                   seed=123, estimator = "var")
+plot_2 <- strapvizr::plot_ci(ex_data, rep = 1000, bin_size = 50, level = 0.99, title = title,
+                   seed = 123, estimator = "var")
 plot_2
 ```
 
