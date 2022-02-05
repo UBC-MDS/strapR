@@ -8,3 +8,6 @@
 ^CONTRIBUTING\.md$
 ^Bootstrapping_Table\.tex$
 ^Sampling_Statistics\.tex$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

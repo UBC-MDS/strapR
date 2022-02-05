@@ -1,0 +1,181 @@
+---
+title: "How to use strapvizr"
+author: "Julien Gordon, Gautham Pughazhendhi, Zack Tang, and Margot Vore"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{How to use strapvizr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+`strapvizr` is a package for performing bootstrapping of a sample to produce plots and statistics for use in final reports and documents. This notebook shows how you can utilize the strapvizr package within a project.
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Import library
+
+```{r setup}
+library(strapvizr)
+```
+
+## Example data
+We will be using the toy dataset `mtcars` to demonstrate the usage. This dataset was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles. We will only use the feature `mpg` for demonstration purpose.
+```{r}
+ex_data <- mtcars |> 
+  dplyr::pull(mpg)
+
+ex_data
+```
+
+## 1. Bootstrap
+There are two functions in the bootstrap module, `bootstrap`and `calculate_boot_stats`. These two functions perform the bootstrapping and calculate the relevant statistics.
+
+### 1.1 `bootstrap_distribution`
+**Functionality**
+
+This function performs the bootstrap and returns a numeric vector as the result.
+
+**Function inputs**
+
+- sample: the data that will be bootstrapped
+- rep: the number of repetitions of bootstrapping
+  - this controls the size of the outputted list
+- n: number of samples in each bootstrap
+  - default is `auto` which means the distribution will be the same size as the original sample
+- estimator: what sample statistic we are calculating with the bootstrap
+  - mean, median, var (i.e. variance), or sd (i.e. standard deviation)
+- seed: we can set this for reproducibility
+
+```{r}
+# returns 50 sample means via bootstrapping
+boot_1 <- strapvizr::bootstrap(ex_data, 50, seed = 123)
+boot_1
+```
+
+```{r}
+# returns 75 sample means via bootstrapping
+boot_2 <- strapvizr::bootstrap(ex_data, 75, estimator = var, seed = 123)
+boot_2
+```
+
+```{r}
+class(boot_1)
+class(boot_2)
+```
+### 1.2 `calculate_boot_stats`
+**Functionality**
+
+This function performs bootstrapping and returns a named list of the sampling distribution statistics.
+
+**Function inputs**
+
+- sample : the data that will be bootstrapped
+- rep : the number of repetitions of bootstrapping
+  - this controls the size of the outputted list
+- n : number of samples in each bootstrap
+  - default is auto which means the distribution will be the same size as the original sample
+- level : the significance level of interest for the sampling distribution
+  - a value between 0 and 1
+- estimator : what sample statistic we are calculating with the bootstrap
+  - mean, median, var (i.e. variance), or sd (i.e. standard deviation)
+- seed : we can set this for reproducibility
+- pass_dist : specifies if the sampling distribution is returned from the function
+
+```{r}
+# Get 100 sample means via bootstrapping and calculate statistics at the 
+#95% confidence interval
+stat_list_1 <- strapvizr::calculate_boot_stats(ex_data, 100, level = 0.95, 
+                                               seed = 123)
+stat_list_1
+```
+
+```{r}
+# Get 50 sample variances via bootstrapping at a 90% confidence level
+# and return the bootstrap distribution along with the statistics
+stat_list_2 <- strapvizr::calculate_boot_stats(ex_data, 50, level = 0.90, 
+                                               seed = 123, estimator = "var",
+                                               pass_dist = TRUE)
+stat_list_2
+```
+
+```{r}
+class(stat_list_1)
+class(stat_list_2)
+```
+
+## 2. Display
+There are two functions in the display module, `plot_ci` and `tabulate_stats`. These use the bootstrapping statistics to create report-ready visualizations and tables of the sampling distribution.
+
+### 2.1 `plot_ci`
+
+**Functionality**
+
+This function creates a histogram of a sampling distribution with its confidence interval and sample mean
+
+**Function Inputs**
+
+- sample : the data that will be bootstrapped
+- rep : the number of repetitions of bootstrapping
+- bin_size : the number of bins data will be split into for the histogram
+- estimator: the sampling distribution estimator
+  - mean, median, var (i.e. variance), or sd (i.e. standard deviation)
+- n : number of samples in each bootstrap
+  - default is auto which means the distribution will be the same size as the original sample
+- level : the significance level of interest for the sampling distribution
+  - value between 0 and 1
+- seed : we can set this for reproducibility
+- title : title of the histogram
+- y_axis : name of the y axis
+- path: path to where function should be saved
+  - default is NULL which means the plot will not be saved
+
+```{r fig.width=7, fig.height=4}
+# Plot sampling distibution of 1000 sample means at a 95% confidence interval
+plot_1 <- strapvizr::plot_ci(ex_data, rep = 1000, level = 0.95, seed = 123)
+plot_1
+```
+
+```{r fig.width=7, fig.height=4}
+# Plot sampling distibution of 1000 sample means at a 99% confidence interval
+# with a unique title and a bin size of 50
+title <- "Bootstrapped miles/(US) gallon"
+plot_2 <- strapvizr::plot_ci(ex_data, rep = 1000, bin_size = 50, level = 0.99, 
+                             title = title, seed = 123, estimator = "var")
+plot_2
+```
+
+```{r}
+class(plot_2)
+```
+### 2.1 `tabulate_stats`
+
+**Functionality**
+
+This function creates a list of two tibble objects that summarize the sampling distribution and the parameters for creating the bootstrapped samples and saves them as latex files.
+
+**Function Inputs**
+
+- stat_list : summary statistics produced by the `calculate_boot_stats()` function
+- precision : the precision of the table values
+  - how many decimal places are shown
+- path : can specify a folder path where you want to save the tables
+  - default is NULL which means the tables will not be saved
+
+```{r}
+stat <- calculate_boot_stats(ex_data, 1000, level = 0.95, seed = 123)
+result  <-  strapvizr::tabulate_stats(stat, precision = 2)
+stats_table <- result[[1]] # stats table
+parameters_table <- result[[2]] # parameter table
+
+stats_table
+parameters_table
+```
+
+```{r}
+class(stats_table)
+class(parameters_table)
+```
