@@ -1,0 +1,10 @@
+pandoc: 2.14.0.3
+pkgdown: 2.0.2
+pkgdown_sha: ~
+articles:
+  my-vignette: my-vignette.html
+last_built: 2022-02-05T01:56Z
+urls:
+  reference: https://ubc-mds.github.io/strapvizr/reference
+  article: https://ubc-mds.github.io/strapvizr/articles
+
