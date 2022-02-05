@@ -71,12 +71,12 @@
 
     
     
-<p><code>strapvizr</code> is a package for performing bootstrapping of a sample to produce plots and statistics for use in final reports and documents. This notebook shows how you can utilize the strapvizpy package within a project.</p>
+<p><code>strapvizr</code> is a package for performing bootstrapping of a sample to produce plots and statistics for use in final reports and documents. This notebook shows how you can utilize the strapvizr package within a project.</p>
 <div class="section level2">
 <h2 id="import-library">Import library<a class="anchor" aria-label="anchor" href="#import-library"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">strapvizr</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ubc-mds.github.io/strapvizr/">strapvizr</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example-data">Example data<a class="anchor" aria-label="anchor" href="#example-data"></a>
@@ -99,13 +99,13 @@
 <h3 id="bootstrap_distribution">1.1 <code>bootstrap_distribution</code><a class="anchor" aria-label="anchor" href="#bootstrap_distribution"></a>
 </h3>
 <p><strong>Functionality</strong></p>
-<p>This function performs the bootstrap and returns an array of the results.</p>
+<p>This function performs the bootstrap and returns a numeric vector as the result.</p>
 <p><strong>Function inputs</strong></p>
 <ul>
 <li>sample: the data that will be bootstrapped</li>
 <li>rep: the number of repetitions of bootstrapping
 <ul>
-<li>this controls the size of the output array</li>
+<li>this controls the size of the outputted list</li>
 </ul>
 </li>
 <li>n: number of samples in each bootstrap
@@ -155,13 +155,13 @@
 <h3 id="calculate_boot_stats">1.2 <code>calculate_boot_stats</code><a class="anchor" aria-label="anchor" href="#calculate_boot_stats"></a>
 </h3>
 <p><strong>Functionality</strong></p>
-<p>This function performs bootstrapping and returns a dictionary of the sampling distribution statistics.</p>
+<p>This function performs bootstrapping and returns a named list of the sampling distribution statistics.</p>
 <p><strong>Function inputs</strong></p>
 <ul>
 <li>sample : the data that will be bootstrapped</li>
 <li>rep : the number of repetitions of bootstrapping
 <ul>
-<li>this controls the size of the output array</li>
+<li>this controls the size of the outputted list</li>
 </ul>
 </li>
 <li>n : number of samples in each bootstrap
@@ -185,7 +185,8 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Get 100 sample means via bootstrapping and calculate statistics at the </span>
 <span class="co">#95% confidence interval</span>
-<span class="va">stat_list_1</span> <span class="op">&lt;-</span> <span class="fu">strapvizr</span><span class="fu">::</span><span class="fu"><a href="../reference/calculate_boot_stats.html">calculate_boot_stats</a></span><span class="op">(</span><span class="va">ex_data</span>, <span class="fl">100</span>, level <span class="op">=</span> <span class="fl">0.95</span>, seed <span class="op">=</span> <span class="fl">123</span><span class="op">)</span>
+<span class="va">stat_list_1</span> <span class="op">&lt;-</span> <span class="fu">strapvizr</span><span class="fu">::</span><span class="fu"><a href="../reference/calculate_boot_stats.html">calculate_boot_stats</a></span><span class="op">(</span><span class="va">ex_data</span>, <span class="fl">100</span>, level <span class="op">=</span> <span class="fl">0.95</span>, 
+                                               seed <span class="op">=</span> <span class="fl">123</span><span class="op">)</span>
 <span class="va">stat_list_1</span>
 <span class="co">#&gt; $lower</span>
 <span class="co">#&gt;     2.5% </span>
@@ -218,8 +219,9 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Get 50 sample variances via bootstrapping at a 90% confidence level</span>
 <span class="co"># and return the bootstrap distribution along with the statistics</span>
-<span class="va">stat_list_2</span> <span class="op">&lt;-</span> <span class="fu">strapvizr</span><span class="fu">::</span><span class="fu"><a href="../reference/calculate_boot_stats.html">calculate_boot_stats</a></span><span class="op">(</span><span class="va">ex_data</span>, <span class="fl">50</span>, level <span class="op">=</span> <span class="fl">0.90</span>, seed <span class="op">=</span> <span class="fl">123</span>, 
-                                estimator <span class="op">=</span> <span class="st">"var"</span>, pass_dist <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">stat_list_2</span> <span class="op">&lt;-</span> <span class="fu">strapvizr</span><span class="fu">::</span><span class="fu"><a href="../reference/calculate_boot_stats.html">calculate_boot_stats</a></span><span class="op">(</span><span class="va">ex_data</span>, <span class="fl">50</span>, level <span class="op">=</span> <span class="fl">0.90</span>, 
+                                               seed <span class="op">=</span> <span class="fl">123</span>, estimator <span class="op">=</span> <span class="st">"var"</span>,
+                                               pass_dist <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">stat_list_2</span>
 <span class="co">#&gt; $lower</span>
 <span class="co">#&gt;       5% </span>
@@ -305,15 +307,15 @@
 </ul>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot sampling distibution of 1000 sample means at a 95% confidence interval</span>
-<span class="va">plot_1</span> <span class="op">&lt;-</span> <span class="fu">strapvizr</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_ci.html">plot_ci</a></span><span class="op">(</span><span class="va">ex_data</span>, rep<span class="op">=</span><span class="fl">1000</span>, level<span class="op">=</span><span class="fl">0.95</span>, seed<span class="op">=</span><span class="fl">123</span><span class="op">)</span>
+<span class="va">plot_1</span> <span class="op">&lt;-</span> <span class="fu">strapvizr</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_ci.html">plot_ci</a></span><span class="op">(</span><span class="va">ex_data</span>, rep <span class="op">=</span> <span class="fl">1000</span>, level <span class="op">=</span> <span class="fl">0.95</span>, seed <span class="op">=</span> <span class="fl">123</span><span class="op">)</span>
 <span class="va">plot_1</span></code></pre></div>
 <p><img src="my-vignette_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Plot sampling distibution of 1000 sample means at a 99% confidence interval</span>
 <span class="co"># with a unique title and a bin size of 50</span>
 <span class="va">title</span> <span class="op">&lt;-</span> <span class="st">"Bootstrapped miles/(US) gallon"</span>
-<span class="va">plot_2</span> <span class="op">&lt;-</span> <span class="fu">strapvizr</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_ci.html">plot_ci</a></span><span class="op">(</span><span class="va">ex_data</span>, rep<span class="op">=</span><span class="fl">1000</span>, bin_size<span class="op">=</span><span class="fl">50</span>, level<span class="op">=</span><span class="fl">0.99</span>, title<span class="op">=</span><span class="va">title</span>,
-                   seed<span class="op">=</span><span class="fl">123</span>, estimator <span class="op">=</span> <span class="st">"var"</span><span class="op">)</span>
+<span class="va">plot_2</span> <span class="op">&lt;-</span> <span class="fu">strapvizr</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_ci.html">plot_ci</a></span><span class="op">(</span><span class="va">ex_data</span>, rep <span class="op">=</span> <span class="fl">1000</span>, bin_size <span class="op">=</span> <span class="fl">50</span>, level <span class="op">=</span> <span class="fl">0.99</span>, 
+                             title <span class="op">=</span> <span class="va">title</span>, seed <span class="op">=</span> <span class="fl">123</span>, estimator <span class="op">=</span> <span class="st">"var"</span><span class="op">)</span>
 <span class="va">plot_2</span></code></pre></div>
 <p><img src="my-vignette_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -321,10 +323,10 @@
 <span class="co">#&gt; [1] "gg"     "ggplot"</span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="tabulate_stats">2.1 <code>tabulate_stats</code><a class="anchor" aria-label="anchor" href="#tabulate_stats"></a>
+<h3 id="tabulate_stats">2.2 <code>tabulate_stats</code><a class="anchor" aria-label="anchor" href="#tabulate_stats"></a>
 </h3>
 <p><strong>Functionality</strong></p>
-<p>This function creates two tables that summarize the sampling distribution and the parameters for creating the bootstrapped samples and saves them as latex files.</p>
+<p>This function creates a list of two tibble objects that summarize the sampling distribution and the parameters for creating the bootstrapped samples and saves them as latex files.</p>
 <p><strong>Function Inputs</strong></p>
 <ul>
 <li>stat_list : summary statistics produced by the <code><a href="../reference/calculate_boot_stats.html">calculate_boot_stats()</a></code> function</li>
@@ -340,7 +342,7 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">stat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculate_boot_stats.html">calculate_boot_stats</a></span><span class="op">(</span><span class="va">ex_data</span>, <span class="fl">1000</span>, level<span class="op">=</span><span class="fl">0.95</span>, seed<span class="op">=</span><span class="fl">123</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">stat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculate_boot_stats.html">calculate_boot_stats</a></span><span class="op">(</span><span class="va">ex_data</span>, <span class="fl">1000</span>, level <span class="op">=</span> <span class="fl">0.95</span>, seed <span class="op">=</span> <span class="fl">123</span><span class="op">)</span>
 <span class="va">result</span>  <span class="op">&lt;-</span>  <span class="fu">strapvizr</span><span class="fu">::</span><span class="fu"><a href="../reference/tabulate_stats.html">tabulate_stats</a></span><span class="op">(</span><span class="va">stat</span>, precision <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="va">stats_table</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="co"># stats table</span>
 <span class="va">parameters_table</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="co"># parameter table</span>
