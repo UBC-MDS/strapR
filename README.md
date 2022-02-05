@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/UBC-MDS/strapR/workflows/R-CMD-check/badge.svg)](https://github.com/UBC-MDS/strapR/actions)
-[![codecov](https://codecov.io/gh/UBC-MDS/strapvizr/branch/main/graph/badge.svg?token=xcNw6kZVgS)](https://codecov.io/gh/UBC-MDS/strapvizr)
+[![codecov](https://codecov.io/gh/UBC-MDS/strapvizr/branch/master/graph/badge.svg?token=xcNw6kZVgS)](https://codecov.io/gh/UBC-MDS/strapvizr)
 <!-- badges: end -->
 
 ## Summary
@@ -43,14 +43,7 @@ encourage the reader to plot the results manually.
 
 ## Installation
 
-You can install the released version of `strapvizr` from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("strapvizr")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+You can install the released version of `strapvizr` from GitHub
 
 ``` r
 # install.packages("devtools")
