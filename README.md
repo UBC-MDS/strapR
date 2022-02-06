@@ -21,8 +21,8 @@ as the desired confidence bounds and number of simulations. The module
 will perform the simulation statistics to generate the bootstrap
 distribution and relevant statistics such as the sample mean and
 bootstrapped confidence interval. The package also has a module for
-visualization of the bootstraped confidence interval, and for creating a
-professional publication-ready table of the relevant statistics.
+visualization of the bootstrapped confidence interval, and for creating
+a professional publication-ready table of the relevant statistics.
 
 ## Package context within the R ecosystem
 
@@ -43,30 +43,25 @@ encourage the reader to plot the results manually.
 
 ## Installation
 
-You can install the released version of `strapvizr` from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("strapvizr")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+You can install the latest version of `strapvizr` from GitHub
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("UBC-MDS/strapvizr")
 ```
 
-## Example
+## Usage
 
-This is a basic example which shows you how to solve a common problem:
+To import the `strapvizr` package
 
 ``` r
-# library("strapvizr")
-# plot_ci([1, 2, 3, 4, 5, 6, 7], 1000, n = 100, ci_level = 0.95, ci_random_seed = 123)
+library(strapvizr)
 ```
 
-## Function Usage
+Please find the detailed documentation
+[here](https://ubc-mds.github.io/strapvizr/).
+
+## Functions
 
 -   `bootstrap_distribution`: Returns a sampling distribution of
     specified replicates is generated for a specified estimator with
