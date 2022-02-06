@@ -33,7 +33,7 @@ The package builds on the [dplyr](https://cran.r-project.org/web/packages/dplyr/
 
 ## Installation
 
-You can install the released version of `strapvizr` from GitHub
+You can install the latest version of `strapvizr` from GitHub
 
 ``` r
 # install.packages("devtools")
