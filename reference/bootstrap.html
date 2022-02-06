@@ -78,7 +78,7 @@ bootstrap sample size of <code>n</code>.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">bootstrap</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.333333 2.333333 1.666667</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.333333 2.333333 1.333333</span>
 <span class="r-in"><span class="fu">bootstrap</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fl">3</span>, <span class="fl">3</span>, estimator <span class="op">=</span> <span class="va">var</span>, seed <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.3333333 1.0000000 0.3333333</span>
 </code></pre></div>
