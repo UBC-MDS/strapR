@@ -43,7 +43,7 @@ encourage the reader to plot the results manually.
 
 ## Installation
 
-You can install the released version of `strapvizr` from GitHub
+You can install the latest version of `strapvizr` from GitHub
 
 ``` r
 # install.packages("devtools")
