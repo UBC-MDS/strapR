@@ -34,7 +34,7 @@ ex_data
 ## 1. Bootstrap
 There are two functions in the bootstrap module, `bootstrap`and `calculate_boot_stats`. These two functions perform the bootstrapping and calculate the relevant statistics.
 
-### 1.1 `bootstrap_distribution`
+### 1.1 `bootstrap`
 **Functionality**
 
 This function performs the bootstrap and returns a numeric vector as the result.
